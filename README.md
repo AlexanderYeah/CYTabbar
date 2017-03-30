@@ -21,14 +21,7 @@
 - 手动导入：将项目中的“CYTabBar”文件夹拖入项目中
 - 在AppDelegate中导入头文件 "CYTabBarController.h" 
 
-```
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-
-CYTabBarController * tabbar = [[CYTabBarController alloc]init];
-
-
-*  你可以这样来设置你的tabbar
+-  你可以这样来设置你的tabbar
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
