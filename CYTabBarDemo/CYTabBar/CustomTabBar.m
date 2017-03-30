@@ -32,7 +32,7 @@
     if (self) {
         self.btnArr = [NSMutableArray array];
         //Set backgroundColor color
-        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -84,7 +84,7 @@
         //Set title
         [btn setTitle:item.title forState:UIControlStateNormal];
         [btn setTitleColor:BARCOLOR(113,109,104,1) forState:UIControlStateNormal];
-        [btn setTitleColor:BARCOLOR(33, 151, 236, 1) forState:UIControlStateSelected];
+        [btn setTitleColor:BARCOLOR(113,109,104,1) forState:UIControlStateSelected];
         
         btn.tag = item.tag;
         [self addSubview:btn];
@@ -100,7 +100,7 @@
         border.fillColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1].CGColor;
         border.path = [UIBezierPath bezierPathWithRect:
                        CGRectMake(0,0,self.bounds.size.width,1)].CGPath;
-        [self.layer addSublayer:border];
+        [self.layer insertSublayer:border atIndex:0];
         _border = border;
     }
     return _border;
@@ -209,7 +209,8 @@
  *  Center button click
  */
 - (void)centerBtnClick:(CYCenterButton *)button{
-    NSLog(@"CustomTabBar.m  141行 CenterBtnClick");
+    NSLog(@"CustomTabBar.m  141行 CenterBtnClick , 可以在这里设置你想要的动画");
+    NSLog(@"比如导入#import \"PlusAnimate.h\" 后使用 +(PlusAnimate *)standardPublishAnimateWithView:(UIView *)view; 来弹出闲鱼的动画");
 }
 
 

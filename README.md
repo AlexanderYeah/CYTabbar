@@ -1,8 +1,33 @@
-# CYTabbar
+# CYTabBar - 底部控制器
+[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
+             )](https://developer.apple.com/iphone/index.action)
+[![Language](http://img.shields.io/badge/language-ObjC-brightgreen.svg?style=flat)](https://developer.apple.com/Objective-C)</br>
+![](http://upload-images.jianshu.io/upload_images/2028853-71816e3e435ea4b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</br>
+![](http://upload-images.jianshu.io/upload_images/2028853-3ad54ef949ad7cbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
+## 一.  功能简介 - Introduction
 
+- [x] 中间按钮可凸出 （bulge设为YES 否则不突出）
+- [x] 中按钮可设置控制器 或 普通按钮 (Controller传入nil为普通按钮)
+- [x] 二级页面不再添加tababr 
+- [x] 小红点提醒 (当前控制器.tabBarItem.badgeValue = @"remind";)
+- [x] 数字提醒用户(当前控制器.tabBarItem.badgeValue = @"100";)
+- [x] 改变数字提醒背景颜色(当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];)
+- [x] 切换控制器 (当前tabBarController.selectedIndex = x(索引为添加控制器时的顺序);)
 
+## 二.  安装 - Installation
 
+- 暂不支持CocoaPods
+- 手动导入：将项目中的“CYTabBar”文件夹拖入项目中
+- 在AppDelegate中导入头文件 "CYTabBarController.h" 
+
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+
+CYTabBarController * tabbar = [[CYTabBarController alloc]init];
+
+<<<<<<< HEAD
 *  你可以这样来设置你的tabbar
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -17,33 +42,43 @@
 }
 ```
 
+=======
+[tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
 
-*  中间按钮可以 设置为 [控制器 或 普通触发事件的按钮]     
-*  ----> 只需要设置为普通按钮的话，Controller传入nil即可
+[tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
 
+[tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@xx" selectedImageName:@"xx"];
 
-*  中间按钮可以 设置为 [圆形凸出 或 普通]
-*  ----> 圆形凸出 bulge传入YES  普通 bulge传入NO
+self.window.rootViewController = tabbar;
+[self.window makeKeyAndVisible];
+return YES;
+}
+```
+>>>>>>> c48d7c29fcb5e256010e34fa6e98221e05036885
 
+## 三.  要求 - Requirements
 
-*  如果你只是想小红点提醒用户
-*  ----> 可以设置控制器的 tabBarItem.badgeValue 为remind
-*  ----> Controller.tabBarItem.badgeValue = @"remind";
-
-
-*  如果你想以数字提醒用户
-*  ----> 可以设置控制器的 tabBarItem.badgeValue 为字符串
-*  ----> Controller.tabBarItem.badgeValue = @"100";
-
-
-*  如果你想切换控制器
-*  ----> 可以设置控制器的 selectedIndex 为数字
-*  ----> tabBarController.selectedIndex = x(索引为添加控制器时的顺序);
+- ARC环境. - Requires ARC
+- 竖屏.    - Vertical Screen
 
 
+## 四.  更新历史 - Update History
+
+- 2017.03.12  修复tabbar销毁的时候观察者移除问题
+
+
+<<<<<<< HEAD
 *  如果你想改变提醒背景颜色
 *  ----> 可以设置控制器的 tabBarItem.badgeColor 为一个颜色
 *  ----> Controller.tabBarItem.badgeColor = [UIColor xxxColor];
 
+=======
+## 五.  更多 - More
+>>>>>>> c48d7c29fcb5e256010e34fa6e98221e05036885
 
+- 如果你发现任何Bug 或者 新需求请issue我.
 
+- 大家一起讨论一起学习进步.
+ 
+- QQ : 707214577<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:707214577:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+  
