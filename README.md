@@ -3,11 +3,8 @@
 
 
 
-
-/**
-
 *  你可以这样来设置你的tabbar
-
+```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     CYTabBarController * tabbar = [[CYTabBarController alloc]init];
@@ -18,6 +15,8 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+```
+
 
 *  中间按钮可以 设置为 [控制器 或 普通触发事件的按钮]     
 *  ----> 只需要设置为普通按钮的话，Controller传入nil即可
@@ -45,6 +44,6 @@
 *  如果你想改变提醒背景颜色
 *  ----> 可以设置控制器的 tabBarItem.badgeColor 为一个颜色
 *  ----> Controller.tabBarItem.badgeColor = [UIColor xxxColor];
-*/
+
 
 

@@ -22,4 +22,8 @@
 @property (strong , nonatomic) NSMutableArray <CYButton*>*btnArr;
 /** 中间按钮 */
 @property (strong , nonatomic) CYCenterButton *centerBtn;
+/**
+ *  更新选择按钮UI
+ */
+- (void)setSelectButtoIndex:(NSUInteger)index;
 @end

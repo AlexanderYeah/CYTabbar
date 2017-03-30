@@ -9,7 +9,8 @@
 #import "CustomTabBar.h"
 #import "CYButton.h"
 #import "CYCenterButton.h"
-#import "PlusAnimate.h"
+#define BARCOLOR(a,b,c,d) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:d]
+
 
 @interface CustomTabBar ()
 /** selctButton */
@@ -31,7 +32,7 @@
     if (self) {
         self.btnArr = [NSMutableArray array];
         //Set backgroundColor color
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
     }
     return self;
 }
@@ -82,8 +83,8 @@
         
         //Set title
         [btn setTitle:item.title forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:113/255.0 green:109/255.0 blue:104/255.0 alpha:1] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:113/255.0 green:109/255.0 blue:104/255.0 alpha:1] forState:UIControlStateSelected];
+        [btn setTitleColor:BARCOLOR(113,109,104,1) forState:UIControlStateNormal];
+        [btn setTitleColor:BARCOLOR(33, 151, 236, 1) forState:UIControlStateSelected];
         
         btn.tag = item.tag;
         [self addSubview:btn];
@@ -96,10 +97,10 @@
 - (CAShapeLayer *)border{
     if (!_border) {
         CAShapeLayer *border = [CAShapeLayer layer];
-        border.fillColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1].CGColor;
+        border.fillColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1].CGColor;
         border.path = [UIBezierPath bezierPathWithRect:
-                       CGRectMake(0,0,self.bounds.size.width,0.5)].CGPath;
-        [self.layer insertSublayer:border atIndex:0];
+                       CGRectMake(0,0,self.bounds.size.width,1)].CGPath;
+        [self.layer addSublayer:border];
         _border = border;
     }
     return _border;
@@ -177,11 +178,10 @@
  */
 - (void)cntrolBtnClick:(CYButton *)button{
     self.controller.selectedIndex = button.tag;
-    [self setSelectButtoIndex:button.tag];
 }
 
 /**
- *  Set select button
+ *  Updata select button UI
  */
 - (void)setSelectButtoIndex:(NSUInteger)index{
     for (CYButton *loop in self.btnArr) {
@@ -210,7 +210,6 @@
  */
 - (void)centerBtnClick:(CYCenterButton *)button{
     NSLog(@"CustomTabBar.m  141行 CenterBtnClick");
-    [PlusAnimate standardPublishAnimateWithView:button];
 }
 
 
