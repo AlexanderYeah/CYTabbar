@@ -27,7 +27,7 @@ self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
 
 CYTabBarController * tabbar = [[CYTabBarController alloc]init];
 
-<<<<<<< HEAD
+
 *  你可以这样来设置你的tabbar
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -42,19 +42,6 @@ CYTabBarController * tabbar = [[CYTabBarController alloc]init];
 }
 ```
 
-=======
-[tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-
-[tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-
-[tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@xx" selectedImageName:@"xx"];
-
-self.window.rootViewController = tabbar;
-[self.window makeKeyAndVisible];
-return YES;
-}
-```
->>>>>>> c48d7c29fcb5e256010e34fa6e98221e05036885
 
 ## 三.  要求 - Requirements
 
@@ -66,15 +53,7 @@ return YES;
 
 - 2017.03.12  修复tabbar销毁的时候观察者移除问题
 
-
-<<<<<<< HEAD
-*  如果你想改变提醒背景颜色
-*  ----> 可以设置控制器的 tabBarItem.badgeColor 为一个颜色
-*  ----> Controller.tabBarItem.badgeColor = [UIColor xxxColor];
-
-=======
 ## 五.  更多 - More
->>>>>>> c48d7c29fcb5e256010e34fa6e98221e05036885
 
 - 如果你发现任何Bug 或者 新需求请issue我.
 
