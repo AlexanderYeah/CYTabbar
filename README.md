@@ -9,7 +9,7 @@
 
 - [x] 中间按钮可凸出 （bulge设为YES 否则不突出）
 - [x] 中按钮可设置控制器 或 普通按钮 (Controller传入nil为普通按钮)
-- [x] 二级页面不再添加tababr 
+- [x] 二级页面不显示tababr 
 - [x] 小红点提醒 (当前控制器.tabBarItem.badgeValue = @"remind";)
 - [x] 数字提醒用户(当前控制器.tabBarItem.badgeValue = @"100";)
 - [x] 改变数字提醒背景颜色(当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];)
@@ -48,6 +48,8 @@ return YES;
 ## 四.  更新历史 - Update History
 
 - 2017.03.12  修复tabbar销毁的时候观察者移除问题
+- 2017.03.31  修复子控制器未添加时tabbar懒加载带来的问题
+- 2017.04.05  修复更新提醒角标UI更新不及时问题
 
 
 ## 五.  更多 - More
@@ -56,5 +58,5 @@ return YES;
 
 - 大家一起讨论一起学习进步.
  
-- QQ : 707214577<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:707214577:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+- QQ : 707214577 点击<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:707214577:52" alt="点击这里给我发消息" title="点击这里给我发消息"/>来给我发消息。</a>
   
