@@ -21,23 +21,20 @@
 - 手动导入：将项目中的“CYTabBar”文件夹拖入项目中
 - 在AppDelegate中导入头文件 "CYTabBarController.h" 
 
+-  你可以这样来设置你的tabbar
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-
-CYTabBarController * tabbar = [[CYTabBarController alloc]init];
-
-[tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-
-[tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-
-[tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@xx" selectedImageName:@"xx"];
-
-self.window.rootViewController = tabbar;
-[self.window makeKeyAndVisible];
-return YES;
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    CYTabBarController * tabbar = [[CYTabBarController alloc]init];
+    [tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
+    [tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
+    [tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@xx" selectedImageName:@"xx"];
+    self.window.rootViewController = tabbar;
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 ```
+
 
 ## 三.  要求 - Requirements
 
@@ -50,7 +47,6 @@ return YES;
 - 2017.03.12  修复tabbar销毁的时候观察者移除问题
 - 2017.03.31  修复子控制器未添加时tabbar懒加载带来的问题
 - 2017.04.05  修复更新提醒角标UI更新不及时问题
-
 
 ## 五.  更多 - More
 
