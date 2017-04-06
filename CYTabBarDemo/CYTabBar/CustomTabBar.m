@@ -209,8 +209,7 @@
  *  Center button click
  */
 - (void)centerBtnClick:(CYCenterButton *)button{
-    NSLog(@"CustomTabBar.m  141行 CenterBtnClick , 可以在这里设置你想要的动画");
-    NSLog(@"比如导入#import \"PlusAnimate.h\" 后使用 +(PlusAnimate *)standardPublishAnimateWithView:(UIView *)view; 来弹出闲鱼的动画");
+    fprintf(stderr,"打印所在: %s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, "你可以在这里设置按钮点击后的动画 (你可能不需要一模一样的闲鱼动画，所以默认给移除了)\n你也可以手动导入#import \"PlusAnimate.h\"   使用 +(PlusAnimate *)standardPublishAnimateWithView:(UIView *)view 来弹出闲鱼的动画");
 }
 
 

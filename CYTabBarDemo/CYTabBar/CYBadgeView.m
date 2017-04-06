@@ -34,8 +34,7 @@
     if (![_badgeValue isEqualToString:badgeValue])
     {
         _badgeValue = badgeValue;
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
+        [self setTitle:badgeValue forState:UIControlStateNormal];
     }
 }
 
