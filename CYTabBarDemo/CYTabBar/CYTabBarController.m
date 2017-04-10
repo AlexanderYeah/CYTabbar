@@ -116,6 +116,7 @@
     UIViewController *viewController = [self findViewControllerWithobject:self.viewControllers[selectedIndex]];
     [self.tabbar removeFromSuperview];
     [viewController.view addSubview:self.tabbar];
+    viewController.extendedLayoutIncludesOpaqueBars = YES;
     [self.tabbar setSelectButtoIndex:selectedIndex];
 }
 
