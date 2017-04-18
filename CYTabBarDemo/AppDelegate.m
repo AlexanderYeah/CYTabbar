@@ -54,7 +54,6 @@
 //    UINavigationController *nav2 = [[UINavigationController alloc]initWithRootViewController:[ViewController new]];
 //    [tabbar addChildController:nav2 title:@"朋友圈" imageName:@"tabbar_discover" selectedImageName:@"tabbar_discoverHL"];
     
-    
     self.window.rootViewController = tabbar;
     [self.window makeKeyAndVisible];
     return YES;

@@ -15,7 +15,7 @@
 		24225B091E75A80500B242A7 /* PlusAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B011E75A80500B242A7 /* PlusAnimate.m */; };
 		24225B0D1E75A86F00B242A7 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B0B1E75A86F00B242A7 /* ViewController2.m */; };
 		2440AC6B1E8BA98F005FE3B2 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = 2440AC6A1E8BA98F005FE3B2 /* show.png */; };
-		24E92FFD1E7AAA87001EF71B /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E92FF31E7AAA87001EF71B /* CustomTabBar.m */; };
+		24E92FFD1E7AAA87001EF71B /* CYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E92FF31E7AAA87001EF71B /* CYTabBar.m */; };
 		24E92FFE1E7AAA87001EF71B /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E92FF51E7AAA87001EF71B /* CYBadgeView.m */; };
 		24E92FFF1E7AAA87001EF71B /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E92FF71E7AAA87001EF71B /* CYButton.m */; };
 		24E930001E7AAA87001EF71B /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E92FF91E7AAA87001EF71B /* CYCenterButton.m */; };
@@ -38,8 +38,8 @@
 		24225B0A1E75A86F00B242A7 /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		24225B0B1E75A86F00B242A7 /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		2440AC6A1E8BA98F005FE3B2 /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
-		24E92FF21E7AAA87001EF71B /* CustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBar.h; sourceTree = "<group>"; };
-		24E92FF31E7AAA87001EF71B /* CustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBar.m; sourceTree = "<group>"; };
+		24E92FF21E7AAA87001EF71B /* CYTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYTabBar.h; sourceTree = "<group>"; };
+		24E92FF31E7AAA87001EF71B /* CYTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYTabBar.m; sourceTree = "<group>"; };
 		24E92FF41E7AAA87001EF71B /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
 		24E92FF51E7AAA87001EF71B /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
 		24E92FF61E7AAA87001EF71B /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 		24E92FF11E7AAA87001EF71B /* CYTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				24E92FF21E7AAA87001EF71B /* CustomTabBar.h */,
-				24E92FF31E7AAA87001EF71B /* CustomTabBar.m */,
+				24E92FF21E7AAA87001EF71B /* CYTabBar.h */,
+				24E92FF31E7AAA87001EF71B /* CYTabBar.m */,
 				24E92FF41E7AAA87001EF71B /* CYBadgeView.h */,
 				24E92FF51E7AAA87001EF71B /* CYBadgeView.m */,
 				24E92FF61E7AAA87001EF71B /* CYButton.h */,
@@ -208,7 +208,7 @@
 			files = (
 				24225AE31E75A7FC00B242A7 /* ViewController.m in Sources */,
 				24225AE01E75A7FC00B242A7 /* AppDelegate.m in Sources */,
-				24E92FFD1E7AAA87001EF71B /* CustomTabBar.m in Sources */,
+				24E92FFD1E7AAA87001EF71B /* CYTabBar.m in Sources */,
 				24E930001E7AAA87001EF71B /* CYCenterButton.m in Sources */,
 				24225ADD1E75A7FC00B242A7 /* main.m in Sources */,
 				24225B0D1E75A86F00B242A7 /* ViewController2.m in Sources */,

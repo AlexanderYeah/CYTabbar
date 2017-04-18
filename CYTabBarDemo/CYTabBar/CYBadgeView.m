@@ -22,6 +22,8 @@
         [self setBackgroundImage:image forState:UIControlStateNormal];
         //set text of alignment
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        //Observer Device Orientation
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
     }
     return self;
 }
@@ -34,7 +36,8 @@
     if (![_badgeValue isEqualToString:badgeValue])
     {
         _badgeValue = badgeValue;
-        [self setTitle:badgeValue forState:UIControlStateNormal];
+        [self setTitle:([badgeValue isEqualToString:@"remind"] ? nil : badgeValue)
+              forState:UIControlStateNormal];
     }
 }
 
@@ -58,6 +61,11 @@
     }
 }
 
+- (void)OrientationDidChange{
+    if (_badgeValue != nil) {
+        [self performSelector:@selector(layoutSubviews) withObject:nil afterDelay:0.05];
+    }
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -96,4 +104,7 @@
                             self.currentBackgroundImage.size.height);
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
 @end

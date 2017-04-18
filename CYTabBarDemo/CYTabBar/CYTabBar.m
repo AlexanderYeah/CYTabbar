@@ -6,26 +6,25 @@
 //  Copyright © 2016年 张春雨. All rights reserved.
 //
 
-#import "CustomTabBar.h"
+#import "CYTabBar.h"
 #import "CYButton.h"
-#import "CYCenterButton.h"
 #define BARCOLOR(a,b,c,d) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:d]
 
 
-@interface CustomTabBar ()
+@interface CYTabBar ()
 /** selctButton */
 @property (weak , nonatomic) CYButton *selButton;
-/** center button of place */
+/** center button of place (kvc will setting) */
 @property(assign , nonatomic) NSInteger centerPlace;
-/** Whether center button to bulge */
+/** Whether center button to bulge (kvc will setting) */
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
-/** tabBarController */
+/** tabBarController (kvc will setting) */
 @property (weak , nonatomic) UITabBarController *controller;
 /** border */
 @property (nonatomic,weak) CAShapeLayer *border;
 @end
 
-@implementation CustomTabBar
+@implementation CYTabBar
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -181,7 +180,7 @@
 }
 
 /**
- *  Updata select button UI
+ *  Updata select button UI (kvc will setting)
  */
 - (void)setSelectButtoIndex:(NSUInteger)index{
     for (CYButton *loop in self.btnArr) {
@@ -209,7 +208,7 @@
  *  Center button click
  */
 - (void)centerBtnClick:(CYCenterButton *)button{
-    fprintf(stderr,"打印所在: %s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, "你可以在这里设置按钮点击后的动画 (你可能不需要一模一样的闲鱼动画，所以默认给移除了)\n你也可以手动导入#import \"PlusAnimate.h\"   使用 +(PlusAnimate *)standardPublishAnimateWithView:(UIView *)view 来弹出闲鱼的动画");
+    [self.delegate tabbar:self clickForCenterButton:button];
 }
 
 

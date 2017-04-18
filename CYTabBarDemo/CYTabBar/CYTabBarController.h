@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomTabBar.h"
+#import "CYTabBar.h"
+
+/*! 宏定义，在UIViewController中的强转 */
+#define CYTABBARCONTROLLER ((CYTabBarController *)self.tabBarController)
 
 /**
- *  READNE
+ *  底部控制器
+ *  README
 
  *  中间按钮可以 设置为 [控制器 或 普通触发事件的按钮]     
  *  ----> 只需要设置为普通按钮的话，Controller传入nil即可
@@ -43,7 +47,7 @@
 
 @interface CYTabBarController : UITabBarController
 /** 自定义的tabbar */
-@property (strong , nonatomic) CustomTabBar* tabbar;
+@property (strong , nonatomic) CYTabBar* tabbar;
 
 /**
  * 添加子控制器
@@ -69,5 +73,12 @@
                      title:(NSString *)title
                  imageName:(NSString *)imageName
          selectedImageName:(NSString *)selectedImageName;
+
+/**
+ * 隐藏tabbar
+ * @param hidden            是否隐藏
+ * @param animated          是否执行动画
+ */
+- (void)setCYTabBarHidden:(BOOL)hidden animated:(BOOL)animated;
 
 @end

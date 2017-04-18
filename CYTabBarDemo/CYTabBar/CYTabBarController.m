@@ -22,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.centerPlace = -1;
+    
+    //Observer Device Orientation
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
 }
 
 /**
@@ -74,13 +77,24 @@
     }
 }
 
+/**
+ *  Device Orientation func
+ */
+- (void)OrientationDidChange{
+    self.tabbar.frame = [self tabbarFrame];
+}
+
+- (CGRect)tabbarFrame{
+    return CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49,
+                      [UIScreen mainScreen].bounds.size.width, 49);
+}
 
 /**
  *  getter
  */
-- (CustomTabBar *)tabbar{
+- (CYTabBar *)tabbar{
     if (!_tabbar && self.items.count) {
-        _tabbar = [[CustomTabBar alloc]initWithFrame:self.tabBar.frame];
+        _tabbar = [[CYTabBar alloc]initWithFrame:[self tabbarFrame]];
         [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
         [_tabbar setValue:self forKey:@"controller"];
         [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
@@ -117,7 +131,7 @@
     [self.tabbar removeFromSuperview];
     [viewController.view addSubview:self.tabbar];
     viewController.extendedLayoutIncludesOpaqueBars = YES;
-    [self.tabbar setSelectButtoIndex:selectedIndex];
+    [self.tabbar setValue:[NSNumber numberWithInteger:selectedIndex] forKeyPath:@"selectButtoIndex"];
 }
 
 
@@ -132,8 +146,33 @@
     return object;
 }
 
+/**
+ *  hidden tabbar and do animated
+ */
+- (void)setCYTabBarHidden:(BOOL)hidden animated:(BOOL)animated{
+    NSTimeInterval time = animated ? 0.3 : 0.0;
+    if (self.tabbar.isHidden) {
+        self.tabbar.hidden = NO;
+        [UIView animateWithDuration:time animations:^{
+            self.tabbar.transform = CGAffineTransformIdentity;
+        }];
+    }else{
+        CGFloat h = self.tabbar.frame.size.height;
+        [UIView animateWithDuration:time-0.1 animations:^{
+            self.tabbar.transform = CGAffineTransformMakeTranslation(0,h);
+        }completion:^(BOOL finished) {
+            self.tabbar.hidden = YES;
+        }];
+    }
+}
+
+
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 @end

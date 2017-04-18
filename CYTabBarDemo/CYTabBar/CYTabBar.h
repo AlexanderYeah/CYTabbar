@@ -8,10 +8,17 @@
 
 
 #import <UIKit/UIKit.h>
+#import "CYCenterButton.h"
 @class CYButton;
-@class CYCenterButton;
+@class CYTabBar;
 
-@interface CustomTabBar : UIView
+/*! 委托 */
+@protocol CYTabBarDelegate <NSObject>
+@required
+- (void)tabbar:(CYTabBar *)tabbar clickForCenterButton:(CYCenterButton *)centerButton;
+@end
+
+@interface CYTabBar : UIView
 /** tabbar按钮显示信息 */
 @property(copy, nonatomic) NSArray<UITabBarItem *> *items;
 /** 设置文字颜色 */
@@ -22,8 +29,7 @@
 @property (strong , nonatomic) NSMutableArray <CYButton*>*btnArr;
 /** 中间按钮 */
 @property (strong , nonatomic) CYCenterButton *centerBtn;
-/**
- *  更新选择按钮UI
- */
-- (void)setSelectButtoIndex:(NSUInteger)index;
+/** 委托 */
+@property(weak , nonatomic) id<CYTabBarDelegate>delegate;
+
 @end
