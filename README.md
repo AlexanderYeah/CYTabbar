@@ -1,9 +1,9 @@
 # CYTabBar
 [![](https://img.shields.io/travis/rust-lang/rust.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
-[![](https://img.shields.io/badge/Pod-v1.0.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
+[![](https://img.shields.io/badge/Pod-v1.0.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -31,11 +31,16 @@ pod 'CYTabBar'
 
 
 ##### 手动导入
-直接将项目中的“CYTabBar”文件夹拖入项目中
+```
+直接将项目中的“CYTabBar”文件夹的源文件 拖入项目中
+```
 
 ##### 你可以这样来设置你的tabbar
-需要导入头文件 "CYTabBarController.h" 
 ```
+需要导入头文件 "CYTabBarController.h" 
+然后在AppDelegate.m中初始化
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     CYTabBarController * tabbar = [[CYTabBarController alloc]init];
