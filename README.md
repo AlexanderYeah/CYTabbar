@@ -17,18 +17,27 @@
 
 ## 二.  安装 - Installation
 
-- 暂不支持CocoaPods
-- 手动导入：将项目中的“CYTabBar”文件夹拖入项目中
+##### CocoaPods安装
+```
+platform :ios, ‘7.0’
+target ‘Your project name’ do
+pod 'CYTabBar'
+end
+```
+
+
+##### 手动导入
+- 将项目中的“CYTabBar”文件夹拖入项目中
 - 在AppDelegate中导入头文件 "CYTabBarController.h" 
 
--  你可以这样来设置你的tabbar
+##### 你可以这样来设置你的tabbar
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     CYTabBarController * tabbar = [[CYTabBarController alloc]init];
     [tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
     [tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-    [tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@xx" selectedImageName:@"xx"];
+    [tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
     self.window.rootViewController = tabbar;
     [self.window makeKeyAndVisible];
     return YES;
@@ -48,6 +57,7 @@
 - 2017.04.05  修复更新提醒角标UI更新不及时问题
 - 2017.04.10  修复设置导航栏为不透明后，坐标偏移问题(Bug 由 QQ用户龙卷风发现)
 - 2017.04.18  更新Hiddentabbar的控制器方法，并将tabbar中间按钮点击方法委托出去(issue by star5cbh )
+- 2017.04.23  生成v1.0.0版本，并支持CocoaPods
 
 ## 五.  更多 - More
 
