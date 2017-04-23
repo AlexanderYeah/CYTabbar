@@ -1,11 +1,10 @@
 # CYTabBar
-[![](https://img.shields.io/travis/rust-lang/rust.svg)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
-             )](https://developer.apple.com/iphone/index.action)
-[![](http://img.shields.io/badge/language-ObjC-brightgreen.svg?style=flat)](https://developer.apple.com/Objective-C)
-[![](https://img.shields.io/badge/Pod-v1.0.0-blue.svg)](https://cocoapods.org/?q=cytabbar)
-[![](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
+[![](https://img.shields.io/travis/rust-lang/rust.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
+[![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
+[![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
+[![](https://img.shields.io/badge/Pod-v1.0.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
+[![](https://img.shields.io/badge/QQ-707214577-red.svg?style=flat)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 </br>
 <p>这是一个很好用的底部控制器,已经跟我经历了2个项目，做为基础的组件，希望能帮助到你。</p>
 </br>
