@@ -23,8 +23,9 @@
         self.titleLabel.font = [UIFont systemFontOfSize:10];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.adjustsImageWhenHighlighted = NO;
-
         self.imageView.contentMode = UIViewContentModeCenter;
+        [self setTitleColor:[CYTabBarConfig shared].textColor forState:UIControlStateNormal];
+        [self setTitleColor:[CYTabBarConfig shared].selectedTextColor forState:UIControlStateSelected];
     }
     return self;
 }

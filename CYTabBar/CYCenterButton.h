@@ -6,7 +6,7 @@
 //  Copyright © 2016年 张春雨. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CYTabBarConfig.h"
 #define BULGEH 16   //button bulge of height
 
 @interface CYCenterButton : UIButton

@@ -8,8 +8,6 @@
 
 #import "CYTabBar.h"
 #import "CYButton.h"
-#define BARCOLOR(a,b,c,d) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:d]
-
 
 @interface CYTabBar ()
 /** selctButton */
@@ -30,8 +28,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.btnArr = [NSMutableArray array];
-        //Set backgroundColor color
-        self.backgroundColor = [UIColor whiteColor];
+        if ([CYTabBarConfig shared].haveBorder) {
+            self.border.fillColor = [CYTabBarConfig shared].bordergColor.CGColor;
+        }
+        self.backgroundColor = [CYTabBarConfig shared].backgroundColor;
+        
+        [[CYTabBarConfig shared]addObserver:self forKeyPath:@"textColor" options:NSKeyValueObservingOptionNew context:nil];
+        [[CYTabBarConfig shared]addObserver:self forKeyPath:@"selectedTextColor" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -57,7 +60,7 @@
             }
             else
             {
-                [btn addTarget:self action:@selector(cntrolBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                [btn addTarget:self action:@selector(controlBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         else
@@ -72,7 +75,7 @@
                       context:(__bridge void * _Nullable)(btn)];
             
             [self.btnArr addObject:(CYButton *)btn];
-            [btn addTarget:self action:@selector(cntrolBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(controlBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         //Set image
@@ -82,9 +85,6 @@
         
         //Set title
         [btn setTitle:item.title forState:UIControlStateNormal];
-        [btn setTitleColor:BARCOLOR(113,109,104,1) forState:UIControlStateNormal];
-        [btn setTitleColor:BARCOLOR(113,109,104,1) forState:UIControlStateSelected];
-        
         btn.tag = item.tag;
         [self addSubview:btn];
     }
@@ -96,9 +96,8 @@
 - (CAShapeLayer *)border{
     if (!_border) {
         CAShapeLayer *border = [CAShapeLayer layer];
-        border.fillColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1].CGColor;
         border.path = [UIBezierPath bezierPathWithRect:
-                       CGRectMake(0,0,self.bounds.size.width,1)].CGPath;
+                       CGRectMake(0,0,self.bounds.size.width,[CYTabBarConfig shared].borderHeight)].CGPath;
         [self.layer insertSublayer:border atIndex:0];
         _border = border;
     }
@@ -121,12 +120,11 @@
         if (i == mid && self.centerBtn!= nil)
         {
             CGFloat h = self.items[self.centerPlace].title ? 10.f : 0;
-            CGFloat radius = 10.f;
             self.centerBtn.frame = self.is_bulge
-            ? CGRectMake(rect.origin.x+(rect.size.width-rect.size.height-radius)/2,
+            ? CGRectMake(rect.origin.x,
                          -BULGEH-h ,
-                         rect.size.height+radius,
-                         rect.size.height+radius)
+                         rect.size.width,
+                         rect.size.height+h)
             : rect;
         }
         else
@@ -135,7 +133,9 @@
         }
         rect.origin.x += rect.size.width;
     }
-    self.border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0,0,self.bounds.size.width,1)].CGPath;
+    _border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0,0,
+                                                                   self.bounds.size.width,
+                                                                   [CYTabBarConfig shared].borderHeight)].CGPath;
 }
 
 /**
@@ -149,33 +149,15 @@
 }
 
 
-
-/**
- *  Set bottom text normal color
- */
-- (void)setTextColor:(UIColor *)textColor{
-    for (UIButton *loop in self.btnArr) {
-        [loop setTitleColor:textColor forState:UIControlStateNormal];
-    }
-    _textColor = textColor;
-}
-
-/**
- *  Set bottom text selected color
- */
-- (void)setSelectedTextColor:(UIColor *)selectedTextColor{
-    for (UIButton *loop in self.btnArr) {
-        [loop setTitleColor:selectedTextColor forState:UIControlStateSelected];
-    }
-    _selectedTextColor = selectedTextColor;
-}
-
-
-
 /**
  *  Control button click
  */
-- (void)cntrolBtnClick:(CYButton *)button{
+- (void)controlBtnClick:(CYButton *)button{
+    if ([self.delegate respondsToSelector:@selector(tabBar:willSelectIndex:)]) {
+        if (![self.delegate tabBar:self willSelectIndex:button.tag]) {
+            return;
+        }
+    }
     self.controller.selectedIndex = button.tag;
 }
 
@@ -183,14 +165,14 @@
  *  Updata select button UI (kvc will setting)
  */
 - (void)setSelectButtoIndex:(NSUInteger)index{
-    for (CYButton *loop in self.btnArr) {
-        if (loop.tag == index) {
+    for (CYButton *loop in self.btnArr){
+        if (loop.tag == index){
             self.selButton = loop;
+            if ([self.delegate respondsToSelector:@selector(tabBar:didSelectIndex:)]) {
+                [self.delegate tabBar:self didSelectIndex:index];
+            }
             return;
         }
-    }
-    if (index == self.centerBtn.tag) {
-        self.selButton = (CYButton *)self.centerBtn;
     }
 }
 
@@ -208,7 +190,9 @@
  *  Center button click
  */
 - (void)centerBtnClick:(CYCenterButton *)button{
-    [self.delegate tabbar:self clickForCenterButton:button];
+    if ([self.delegate respondsToSelector:@selector(tabbar:clickForCenterButton:)]) {
+        [self.delegate tabbar:self clickForCenterButton:button];
+    }
 }
 
 
@@ -217,11 +201,21 @@
  */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"badgeValue"] || [keyPath isEqualToString:@"badgeColor"]) {
+    if ([keyPath isEqualToString:@"badgeValue"] || [keyPath isEqualToString:@"badgeColor"]){
         CYButton *btn = (__bridge CYButton *)(context);
         btn.item = (UITabBarItem*)object;
     }
+    else if ([object isEqual:[CYTabBarConfig shared]]){
+        if([keyPath isEqualToString:@"textColor"] ||[keyPath isEqualToString:@"selectedTextColor"]){
+            UIColor *color = change[@"new"];
+            UIControlState state = [keyPath isEqualToString:@"textColor"]? UIControlStateNormal: UIControlStateSelected;
+            for (UIButton *loop in self.btnArr){
+                [loop setTitleColor:color forState:state];
+            }
+        }
+    }
 }
+
 
 /**
  *  Remove observer
@@ -240,6 +234,8 @@
                                forKeyPath:@"badgeColor"
                                   context:(__bridge void * _Nullable)(self.btnArr[i])];
     }
+    [[CYTabBarConfig shared]removeObserver:self forKeyPath:@"textColor" context:nil];
+    [[CYTabBarConfig shared]removeObserver:self forKeyPath:@"selectedTextColor" context:nil];
 }
 
 @end

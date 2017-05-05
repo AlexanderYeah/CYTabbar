@@ -91,8 +91,9 @@
     
     int n = 0;
     self.hidden = NO;
-    if ([_badgeValue integerValue]>999) {
-        [self setTitle:@"···" forState:UIControlStateNormal];
+    if ([_badgeValue integerValue]>100) {
+        n = 10;
+        [self setTitle:@"99+" forState:UIControlStateNormal];
     }
     else{
         n = [_badgeValue integerValue] > 9 ? 8 : 0; //number beyond 9 to broaden

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "PlusAnimate.h"
 #import "CYTabBarController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()<UITableViewDelegate , CYTabBarDelegate>
 @end
@@ -44,10 +45,22 @@
 }
 
 
-#pragma mark - 中间按钮点击
+#pragma mark - CYTabBarDelegate
+//中间按钮点击
 - (void)tabbar:(CYTabBar *)tabbar clickForCenterButton:(CYCenterButton *)centerButton{
     [PlusAnimate standardPublishAnimateWithView:centerButton];
 }
+//是否允许切换
+- (BOOL)tabBar:(CYTabBar *)tabBar willSelectIndex:(NSInteger)index{
+    NSLog(@"将要切换到---> %ld",index);
+    return YES;
+}
+//通知切换的下表
+- (void)tabBar:(CYTabBar *)tabBar didSelectIndex:(NSInteger)index{
+    NSLog(@"切换到---> %ld",index);
+}
+
+
 
 
 #pragma mark - 跳转页面
@@ -57,13 +70,17 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
 #pragma mark - 隐藏tabbar
 - (void)hidden{
     [CYTABBARCONTROLLER setCYTabBarHidden:!CYTABBARCONTROLLER.tabbar.hidden animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    static int i= 0;
+    NSLog(@"touchesBegan %d",i++);
 }
 
 @end

@@ -12,19 +12,19 @@
 @class CYButton;
 @class CYTabBar;
 
-/*! 委托 */
 @protocol CYTabBarDelegate <NSObject>
-@required
+@optional
+/*! 中间按钮点击会通过这个代理通知你通知 */
 - (void)tabbar:(CYTabBar *)tabbar clickForCenterButton:(CYCenterButton *)centerButton;
+/*! 默认返回YES，允许所有的切换，不过你通过TabBarController来直接设置SelectIndex来切换的是不会收到通知的。 */
+- (BOOL)tabBar:(CYTabBar *)tabBar willSelectIndex:(NSInteger)index;
+/*! 通知已经选择的控制器下标。 */
+- (void)tabBar:(CYTabBar *)tabBar didSelectIndex:(NSInteger)index;
 @end
 
 @interface CYTabBar : UIView
 /** tabbar按钮显示信息 */
 @property(copy, nonatomic) NSArray<UITabBarItem *> *items;
-/** 设置文字颜色 */
-@property (strong , nonatomic) UIColor *textColor;
-/** 设置选中颜色 */
-@property (strong , nonatomic) UIColor *selectedTextColor;
 /** 其他按钮 */
 @property (strong , nonatomic) NSMutableArray <CYButton*>*btnArr;
 /** 中间按钮 */

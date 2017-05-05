@@ -7,6 +7,7 @@
 //
 
 #import "ViewController2.h"
+#import "CYTabBar.h"
 
 @interface ViewController2 ()
 
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.tabBarItem.badgeColor = [UIColor orangeColor];
+    self.tabBarItem.badgeValue = @"1234";
 }
 
 - (void)didReceiveMemoryWarning {

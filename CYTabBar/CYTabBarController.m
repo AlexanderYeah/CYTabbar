@@ -36,12 +36,14 @@
     if (!firstInit)
     {
         firstInit = YES;
-        if (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1){
-            self.selectedIndex = self.centerPlace;
+        NSInteger index = [CYTabBarConfig shared].selectIndex;
+        if (index < 0) {
+            self.selectedIndex = (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1)
+            ? self.centerPlace
+            : 0;
         }else{
-            self.selectedIndex = 0;
+            self.selectedIndex = index;
         }
-        [self.tabbar setValue:[NSNumber numberWithInteger:self.selectedIndex] forKey:@"selectButtoIndex"];
     }
 }
 
@@ -93,10 +95,10 @@
  *  getter
  */
 - (CYTabBar *)tabbar{
-    if (!_tabbar && self.items.count) {
+    if (self.items.count && !_tabbar) {
         _tabbar = [[CYTabBar alloc]initWithFrame:[self tabbarFrame]];
-        [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
         [_tabbar setValue:self forKey:@"controller"];
+        [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
         [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
         _tabbar.items = self.items;
         
@@ -116,6 +118,12 @@
     return _items;
 }
 
+- (void)InitializeTabbar{
+    [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
+    [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
+    _tabbar.items = self.items;
+}
+
 
 /**
  *  Update current select controller
@@ -123,7 +131,7 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex{
     if (selectedIndex >= self.viewControllers.count){
         @throw [NSException exceptionWithName:@"selectedTabbarError"
-                                       reason:@"Don't have the controller can be used, index beyond the viewControllers."
+                                       reason:@"No controller can be used,Because of index beyond the viewControllers,Please check the configuration of tabbar."
                                      userInfo:nil];
     }
     [super setSelectedIndex:selectedIndex];

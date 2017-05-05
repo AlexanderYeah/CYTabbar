@@ -6,7 +6,7 @@
 //  Copyright © 2016年 张春雨. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CYTabBarConfig.h"
 
 @interface CYBadgeView : UIButton
 /** remind number */

@@ -34,6 +34,8 @@
     [keyWindow addSubview:animateView];
     CGRect rect = [animateView convertRect:view.frame fromView:view.superview];
     rect.origin.y += 5;
+    rect.origin.x += (rect.size.width-rect.size.height)/2;
+    rect.size.width = rect.size.height;
     animateView.rect = rect;
     
     //Add button
@@ -133,7 +135,6 @@
  *  button click
  */
 - (void)BtnClick:(UIButton*)btn{
-    NSLog(@"%ld click",(long)btn.tag);
     [self.delegate didSelectBtnWithBtnTag:btn.tag];
     [self removeFromSuperview];
 }
@@ -193,14 +194,14 @@
  */
 - (void)cancelAnimation{
     //rotation
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:0.1 animations:^{
         _CenterBtn.transform = CGAffineTransformIdentity;
     }completion:^(BOOL finished) {
         //move
         int n = (int)_BtnItem.count;
         for (int i = n-1; i>=0; i--){
             UIButton *btn = _BtnItem[i];
-            [UIButton animateWithDuration:0.25 delay:0.1*(n-i) options:UIViewAnimationOptionTransitionCurlDown animations:^{
+            [UIButton animateWithDuration:0.2 delay:0.1*(n-i) options:UIViewAnimationOptionTransitionCurlDown animations:^{
                 btn.center = CGPointMake(W/2 ,H-43.052385);
                 btn.transform = CGAffineTransformMakeScale(1, 1);
                 btn.transform = CGAffineTransformRotate(btn.transform, -M_PI_4);

@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CYTabBar.h"
-
-/*! 宏定义，在UIViewController中的强转 */
 #define CYTABBARCONTROLLER ((CYTabBarController *)self.tabBarController)
 
 /**
- *  底部控制器
  *  README
-
+ 
  *  中间按钮可以 设置为 [控制器 或 普通触发事件的按钮]     
  *  ----> 只需要设置为普通按钮的话，Controller传入nil即可
  
@@ -42,6 +39,14 @@
  *  如果你想改变提醒背景颜色
  *  ----> 可以设置控制器的 tabBarItem.badgeColor 为一个颜色
  *  ----> Controller.tabBarItem.badgeColor = [UIColor xxxColor];
+ 
+ *  改变默认的UI配置
+ *  ----> 可以通过单例 CYTabBarConfig 来改变默认选择的控制器、背景色、字体色等
+ *  ----> 如果中间按钮为控制器那么它的索引为添加的个数的最后
+ *  ----> [CYTabBarConfig shared]
+ 
+ *  源代码地址
+ *  https://github.com/zhangchunyu2016/CYTabbar
  */
 
 
