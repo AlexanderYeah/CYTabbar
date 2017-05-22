@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-v1.0.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.1.1-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -23,7 +23,7 @@
 - [x] 改变数字提醒背景颜色 				---> 当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];
 - [x] 方便更改默认选择的控制器  			---> [CYTabBarConfig shared].selectIndex = 1;
 - [x] 统一的定制UI 						---> [CYTabBarConfig shared].xxx = xxx;
-- [x] tabBar代理通知常用事件
+等...
 
 ## 二.  安装 - Installation
 
@@ -70,6 +70,7 @@ pod 'CYTabBar'
 - 2017.04.10  修复设置导航栏为不透明后，坐标偏移问题(Bug 由 QQ用户龙卷风发现)
 - 2017.04.18  增加Hiddentabbar的控制器方法，并将tabbar中间按钮点击方法委托出去(issue by star5cbh )
 - 2017.05.05  修复部分小问题，增加统一配置UI的单例。 增加默认选择控制器的属性，增加代理通知切换控制器方法。(issue by HY-Vae )
+- 2017.05.22  修复中间按钮选择图片的问题
 			  
 
 ## 五.  更多 - More
