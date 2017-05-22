@@ -165,14 +165,18 @@
  *  Updata select button UI (kvc will setting)
  */
 - (void)setSelectButtoIndex:(NSUInteger)index{
-    for (CYButton *loop in self.btnArr){
-        if (loop.tag == index){
-            self.selButton = loop;
-            if ([self.delegate respondsToSelector:@selector(tabBar:didSelectIndex:)]) {
-                [self.delegate tabBar:self didSelectIndex:index];
+    if (index == self.centerBtn.tag) {
+         self.selButton = (CYButton *)self.centerBtn;
+    }else{
+        for (CYButton *loop in self.btnArr){
+            if (loop.tag == index){
+                self.selButton = loop;
+                break;
             }
-            return;
         }
+    }
+    if ([self.delegate respondsToSelector:@selector(tabBar:didSelectIndex:)]) {
+        [self.delegate tabBar:self didSelectIndex:index];
     }
 }
 

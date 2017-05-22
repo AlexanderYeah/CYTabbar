@@ -55,7 +55,7 @@
     NSLog(@"将要切换到---> %ld",index);
     return YES;
 }
-//通知切换的下表
+//通知切换的下标
 - (void)tabBar:(CYTabBar *)tabBar didSelectIndex:(NSInteger)index{
     NSLog(@"切换到---> %ld",index);
 }
