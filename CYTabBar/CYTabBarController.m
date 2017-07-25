@@ -41,7 +41,10 @@
             self.selectedIndex = (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1)
             ? self.centerPlace
             : 0;
-        }else{
+        }else if (index >= self.viewControllers.count){
+            self.selectedIndex = self.viewControllers.count-1;
+        }
+        else{
             self.selectedIndex = index;
         }
     }
@@ -134,6 +137,7 @@
                                        reason:@"No controller can be used,Because of index beyond the viewControllers,Please check the configuration of tabbar."
                                      userInfo:nil];
     }
+    
     [super setSelectedIndex:selectedIndex];
     UIViewController *viewController = [self findViewControllerWithobject:self.viewControllers[selectedIndex]];
     [self.tabbar removeFromSuperview];

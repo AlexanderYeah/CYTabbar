@@ -202,7 +202,7 @@
         for (int i = n-1; i>=0; i--){
             UIButton *btn = _BtnItem[i];
             [UIButton animateWithDuration:0.2 delay:0.1*(n-i) options:UIViewAnimationOptionTransitionCurlDown animations:^{
-                btn.center = CGPointMake(W/2 ,H-43.052385);
+                btn.center = self.CenterBtn.center;
                 btn.transform = CGAffineTransformMakeScale(1, 1);
                 btn.transform = CGAffineTransformRotate(btn.transform, -M_PI_4);
                 
