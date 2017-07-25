@@ -111,7 +111,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     int count = (int)(self.centerBtn ? self.btnArr.count+1 : self.btnArr.count);
-    int mid = count/2;
+    NSInteger mid = [CYTabBarConfig shared].centerBtnIndex;
+    mid = (mid>=0 && mid <count) ? mid : count/2;
     CGRect rect = CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height);
     int j = 0;
     
