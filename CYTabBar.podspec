@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
     s.homepage     = "https://github.com/zhangchunyu2016/CYTabbar"
     s.license              = { :type => "MIT", :file => "LICENSE" }
     s.author             = { "chunyuZhang" => "707214577@qq.com" }
-    s.social_media_url   = "http://www.jianshu.com/u/371e7dfb9a55"
+    s.social_media_url   = "https://github.com/zhangchunyu2016"
     s.source       = { :git => "https://github.com/zhangchunyu2016/CYTabbar.git", :tag => s.version }
     s.source_files  = "CYTabBar/*.{h,m}"
     s.resources          = "CYTabBar/CYTabBar.bundle"
