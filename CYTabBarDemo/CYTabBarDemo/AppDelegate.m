@@ -29,8 +29,8 @@
     [CYTabBarConfig shared].selectedTextColor = [UIColor orangeColor];
     [CYTabBarConfig shared].textColor = [UIColor grayColor];
     [CYTabBarConfig shared].backgroundColor = [UIColor whiteColor];
-    [CYTabBarConfig shared].selectIndex = 0;
-    [CYTabBarConfig shared].centerBtnIndex = 0;
+    [CYTabBarConfig shared].selectIndex = 1;
+    [CYTabBarConfig shared].centerBtnIndex = 1;
     
     
     /**
@@ -41,7 +41,6 @@
     UINavigationController *nav2 = [[UINavigationController alloc]initWithRootViewController:[ViewController new]];
     [tabbar addChildController:nav2 title:@"我的" imageName:@"Btn02" selectedImageName:@"SelectBtn02"];
     [tabbar addCenterController:nil bulge:YES title:@"发布" imageName:@"post_normal" selectedImageName:@"post_normal"];
-    
     
     
     /**
