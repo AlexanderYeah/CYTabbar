@@ -14,6 +14,7 @@
 		24225AEB1E75A7FC00B242A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24225AE91E75A7FC00B242A7 /* LaunchScreen.storyboard */; };
 		24225B091E75A80500B242A7 /* PlusAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B011E75A80500B242A7 /* PlusAnimate.m */; };
 		24225B0D1E75A86F00B242A7 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B0B1E75A86F00B242A7 /* ViewController2.m */; };
+		24263A691F29C81800A48A50 /* UITabBarItem+BadgeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */; };
 		24EDE1291EBC0871008995D6 /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE11F1EBC0871008995D6 /* CYBadgeView.m */; };
 		24EDE12A1EBC0871008995D6 /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE1211EBC0871008995D6 /* CYButton.m */; };
 		24EDE12B1EBC0871008995D6 /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE1231EBC0871008995D6 /* CYCenterButton.m */; };
@@ -37,6 +38,8 @@
 		24225B011E75A80500B242A7 /* PlusAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlusAnimate.m; sourceTree = "<group>"; };
 		24225B0A1E75A86F00B242A7 /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		24225B0B1E75A86F00B242A7 /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
+		24263A671F29C81800A48A50 /* UITabBarItem+BadgeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+BadgeColor.h"; sourceTree = "<group>"; };
+		24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+BadgeColor.m"; sourceTree = "<group>"; };
 		24EDE11E1EBC0871008995D6 /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
 		24EDE11F1EBC0871008995D6 /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
 		24EDE1201EBC0871008995D6 /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 		24EDE11D1EBC0871008995D6 /* CYTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				24263A671F29C81800A48A50 /* UITabBarItem+BadgeColor.h */,
+				24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */,
 				24EDE11E1EBC0871008995D6 /* CYBadgeView.h */,
 				24EDE11F1EBC0871008995D6 /* CYBadgeView.m */,
 				24EDE1201EBC0871008995D6 /* CYButton.h */,
@@ -218,6 +223,7 @@
 				24225B0D1E75A86F00B242A7 /* ViewController2.m in Sources */,
 				24EDE12E1EBC0871008995D6 /* CYTabBarController.m in Sources */,
 				24EDE12A1EBC0871008995D6 /* CYButton.m in Sources */,
+				24263A691F29C81800A48A50 /* UITabBarItem+BadgeColor.m in Sources */,
 				24225B091E75A80500B242A7 /* PlusAnimate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +282,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -317,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -329,6 +335,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = R77KAS4JTD;
 				INFOPLIST_FILE = CYTabBarDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChunyuZhang.CYTabBarDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -340,6 +347,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = R77KAS4JTD;
 				INFOPLIST_FILE = CYTabBarDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChunyuZhang.CYTabBarDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
