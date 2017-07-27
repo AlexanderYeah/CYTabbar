@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.1.4-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.2.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -72,7 +72,7 @@ pod 'CYTabBar'
 - 2017.05.22  修复中间按钮选择图片的问题
 - 2017.07.26  可定义中间按钮位置
 - 2017.07.27  修复第0个控制器，无选中状态的bug （昨晚临时更新版本导致的问题，很抱歉，给大家带来麻烦）
-- 2017.07.27  修复badgeColor在iOS10下无此api调用崩溃的问题
+- 2017.07.27  修复badgeColor在iOS10下无此api调用崩溃的问题,item底部无文字图片居中
 			  
 
 ## 五.  更多 - More

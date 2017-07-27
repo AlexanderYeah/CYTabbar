@@ -30,12 +30,14 @@
  */
 + (PlusAnimate *)standardPublishAnimateWithView:(UIView *)view{
     PlusAnimate * animateView = [[PlusAnimate alloc]init];
+    CGFloat h = ((UIView *)[view valueForKeyPath:@"imageView"]).frame.size.height;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:animateView];
     CGRect rect = [animateView convertRect:view.frame fromView:view.superview];
     rect.origin.y += 5;
+    rect.size.height = h;
     rect.origin.x += (rect.size.width-rect.size.height)/2;
-    rect.size.width = rect.size.height;
+    rect.size.width = h;
     animateView.rect = rect;
     
     //Add button
@@ -70,7 +72,10 @@
  */
 - (void)CrentBtnImageName:(NSString *)ImageName Title:(NSString *)Title tag:(int)tag{
     if (_BtnItem.count >= 3)  return;
-    UIButton * btn = [[UIButton alloc]initWithFrame:self.rect];
+    CGRect rect = self.rect;
+    rect.size = CGSizeMake(rect.size.width-10, rect.size.height-10);
+    rect.origin = CGPointMake(rect.origin.x+5, rect.origin.y+5);
+    UIButton * btn = [[UIButton alloc]initWithFrame:rect];
     btn.tag = tag;
     [btn setImage:[UIImage imageNamed:ImageName] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
