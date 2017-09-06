@@ -3,12 +3,12 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.2.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.2.2-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
 </br>
-<p>这是一个很好用的底部控制器,已经跟我经历了2个项目，做为基础的组件，希望能帮助到你。</p></br>
+<p>也许这不是一个很完善的底部控制器,但是很好用，已经跟我经历了2个项目，做为基础的组件，希望能帮助到你。</p></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-deab948167f6ddb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-3ad54ef949ad7cbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320"></br>
 
@@ -66,13 +66,14 @@ pod 'CYTabBar'
 - 2017.03.12  修复tabbar销毁的时候观察者移除问题
 - 2017.03.31  修复子控制器未添加时tabbar懒加载带来的问题
 - 2017.04.05  修复更新提醒角标UI更新不及时问题
-- 2017.04.10  修复设置导航栏为不透明后，坐标偏移问题(Bug 由 QQ用户龙卷风发现)
-- 2017.04.18  增加Hiddentabbar的控制器方法，并将tabbar中间按钮点击方法委托出去(issue by star5cbh )
-- 2017.05.05  修复部分小问题，增加统一配置UI的单例。 增加默认选择控制器的属性，增加代理通知切换控制器方法。(issue by HY-Vae )
+- 2017.04.10  修复设置导航栏为不透明后，坐标偏移问题
+- 2017.04.18  增加Hiddentabbar的控制器方法，并将tabbar中间按钮点击方法委托出去
+- 2017.05.05  修复部分小问题，增加统一配置UI的单例。 增加默认选择控制器的属性，增加代理通知切换控制器方法
 - 2017.05.22  修复中间按钮选择图片的问题
 - 2017.07.26  可定义中间按钮位置
-- 2017.07.27  修复第0个控制器，无选中状态的bug （昨晚临时更新版本导致的问题，很抱歉，给大家带来麻烦）
+- 2017.07.27  修复第0个控制器，无选中状态的bug 
 - 2017.07.27  修复badgeColor在iOS10下无此api调用崩溃的问题,item底部无文字图片居中
+- 2017.09.07  修复 屏幕监听转向的观察者移除时name不一致
 			  
 
 ## 五.  更多 - More
