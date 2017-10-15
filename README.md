@@ -3,12 +3,12 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.2.2-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.3.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
 </br>
-<p>也许这不是一个很完善的底部控制器,但是很好用，已经跟我经历了2个项目，做为基础的组件，希望能帮助到你。</p></br>
+<p>也许这不是一个很完善的底部控制器,但很好用，已经跟我经历了2个项目，做为基础的组件，希望帮助到你。</p></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-deab948167f6ddb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-3ad54ef949ad7cbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320"></br>
 
@@ -74,6 +74,7 @@ pod 'CYTabBar'
 - 2017.07.27  修复第0个控制器，无选中状态的bug 
 - 2017.07.27  修复badgeColor在iOS10下无此api调用崩溃的问题,item底部无文字图片居中
 - 2017.09.07  修复 屏幕监听转向的观察者移除时name不一致
+- 2017.10.16  适配iPhone X, 增加安全区域
 			  
 
 ## 五.  更多 - More

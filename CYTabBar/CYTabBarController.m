@@ -30,6 +30,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
+- (void)viewWillLayoutSubviews {
+    if (@available(iOS 11.0, *)) {
+        if (self.view.safeAreaInsets.bottom != 0.0) {
+            self.tabbar.frame = [self tabbarFrame];
+        }
+    }
+}
+
 /**
  *  Initialize selected
  */
@@ -93,7 +101,13 @@
 }
 
 - (CGRect)tabbarFrame{
-    return CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49,
+    CGFloat safeBottom = 0.0;
+    if (@available(iOS 11.0, *)) {
+        if (self.view.safeAreaInsets.bottom != 0.0) {
+            safeBottom = self.view.safeAreaInsets.bottom;
+        }
+    }
+    return CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49-safeBottom,
                       [UIScreen mainScreen].bounds.size.width, 49);
 }
 
