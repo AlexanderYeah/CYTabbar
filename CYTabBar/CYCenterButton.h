@@ -10,7 +10,7 @@
 #define BULGEH 16   //button bulge of height
 
 @interface CYCenterButton : UIButton
-/** Whether center button to bulge */
+// Whether center button to bulge
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
 @end
  

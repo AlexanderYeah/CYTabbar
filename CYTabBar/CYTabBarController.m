@@ -12,12 +12,14 @@
 #endif
 
 @interface CYTabBarController ()
-/** center button of place ( -1:none center button >=0:contain center button) */
+// center button of place ( -1:none center button >=0:contain center button)
 @property(assign , nonatomic) NSInteger centerPlace;
-/** Whether center button to bulge */
+// Whether center button to bulge
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
-/** items */
+// items
 @property (nonatomic,strong) NSMutableArray <UITabBarItem *>*items;
+// the bottom safeArea
+@property(assign , nonatomic) CGFloat safeBottomInsets;
 @end
 
 @implementation CYTabBarController{int tabBarItemTag;BOOL firstInit;}
@@ -26,7 +28,7 @@
     [super viewDidLoad];
     self.centerPlace = -1;
     
-    //Observer Device Orientation
+    // Observer Device Orientation
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
@@ -44,18 +46,17 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (!firstInit)
-    {
+    if (!firstInit) {
         firstInit = YES;
         NSInteger index = [CYTabBarConfig shared].selectIndex;
         if (index < 0) {
             self.selectedIndex = (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1)
             ? self.centerPlace
             : 0;
-        }else if (index >= self.viewControllers.count){
+        } else if (index >= self.viewControllers.count){
             self.selectedIndex = self.viewControllers.count-1;
         }
-        else{
+        else {
             self.selectedIndex = index;
         }
     }
@@ -100,15 +101,20 @@
     self.tabbar.frame = [self tabbarFrame];
 }
 
+/**
+ *  Gets the frame of tabBar
+ */
 - (CGRect)tabbarFrame{
-    CGFloat safeBottom = 0.0;
-    if (@available(iOS 11.0, *)) {
-        if (self.view.safeAreaInsets.bottom != 0.0) {
-            safeBottom = self.view.safeAreaInsets.bottom;
+    return ({
+        self.safeBottomInsets = 0.0;
+        if (@available(iOS 11.0, *)) {
+            if (self.view.safeAreaInsets.bottom != 0.0) {
+                self.safeBottomInsets = self.view.safeAreaInsets.bottom;
+            }
         }
-    }
-    return CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49-safeBottom,
-                      [UIScreen mainScreen].bounds.size.width, 49);
+        CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49-self.safeBottomInsets,
+                   [UIScreen mainScreen].bounds.size.width, 49+self.safeBottomInsets);
+    });
 }
 
 /**
@@ -143,7 +149,6 @@
     [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
     _tabbar.items = self.items;
 }
-
 
 /**
  *  Update current select controller
@@ -192,11 +197,6 @@
             self.tabbar.hidden = YES;
         }];
     }
-}
-
-
-- (void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc{

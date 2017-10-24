@@ -10,7 +10,7 @@
 #import "CYBadgeView.h"
 
 @interface CYButton()
-/** remind number */
+// remind number
 @property (weak , nonatomic)CYBadgeView * badgeView;
 @end
 
@@ -18,8 +18,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         self.titleLabel.font = [UIFont systemFontOfSize:10];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.adjustsImageWhenHighlighted = NO;
@@ -30,10 +29,11 @@
     return self;
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat width = self.frame.size.width;
-    CGFloat height = self.superview.frame.size.height;
+    
+    CGFloat height = self.superview.frame.size.height - [[self.superview valueForKeyPath:@"controller.safeBottomInsets"]floatValue];
     if (self.titleLabel.text && ![self.titleLabel.text isEqualToString:@""]) {
         self.titleLabel.frame = CGRectMake(0, height-16, width, 16);
         self.imageView.frame = CGRectMake(0 , 0, width, 35);

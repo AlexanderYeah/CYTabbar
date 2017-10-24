@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CYButton : UIButton
-/** item */
+// item
 @property (weak , nonatomic) UITabBarItem *item;
 @end

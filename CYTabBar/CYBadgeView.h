@@ -9,8 +9,8 @@
 #import "CYTabBarConfig.h"
 
 @interface CYBadgeView : UIButton
-/** remind number */
+// remind number
 @property (copy , nonatomic) NSString *badgeValue;
-/** remind color */
+// remind color
 @property (copy , nonatomic) UIColor *badgeColor;
 @end

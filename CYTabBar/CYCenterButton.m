@@ -25,9 +25,11 @@
 }
 
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    if (CGRectEqualToRect(self.frame, CGRectZero)) return;
+    if (CGRectEqualToRect(self.frame, CGRectZero)) {
+        return;
+    }
     
     /**
      *  button is bulge

@@ -10,15 +10,15 @@
 #import "CYButton.h"
 
 @interface CYTabBar ()
-/** selctButton */
+// selctButton
 @property (weak , nonatomic) CYButton *selButton;
-/** center button of place (kvc will setting) */
+// center button of place (kvc will setting)
 @property(assign , nonatomic) NSInteger centerPlace;
-/** Whether center button to bulge (kvc will setting) */
+// Whether center button to bulge (kvc will setting)
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
-/** tabBarController (kvc will setting) */
+// tabBarController (kvc will setting)
 @property (weak , nonatomic) UITabBarController *controller;
-/** border */
+// border
 @property (nonatomic,weak) CAShapeLayer *border;
 @end
 
@@ -93,7 +93,7 @@
 /**
  *  getter
  */
-- (CAShapeLayer *)border{
+- (CAShapeLayer *)border {
     if (!_border) {
         CAShapeLayer *border = [CAShapeLayer layer];
         border.path = [UIBezierPath bezierPathWithRect:
@@ -108,18 +108,22 @@
 /**
  *  layout
  */
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    int count = (int)(self.centerBtn ? self.btnArr.count+1 : self.btnArr.count);
-    NSInteger mid = [CYTabBarConfig shared].centerBtnIndex;
-    mid = (mid>=0 && mid <count) ? mid : count/2;
-    CGRect rect = CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height);
-    int j = 0;
     
-    for (int i=0; i<count; i++)
-    {
-        if (i == mid && self.centerBtn!= nil)
-        {
+    int count = (int)(self.centerBtn ? self.btnArr.count+1 : self.btnArr.count);
+    NSInteger mid = ({
+        NSInteger mid = [CYTabBarConfig shared].centerBtnIndex;
+        (mid>=0 && mid <count) ? mid : count/2;
+    });
+    CGRect rect = ({
+        CGFloat safeBottom = [[self.controller valueForKeyPath:@"safeBottomInsets"]floatValue];
+        CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height-safeBottom);
+    });
+    
+    int j = 0;
+    for (int i=0; i<count; i++) {
+        if (i == mid && self.centerBtn!= nil) {
             CGFloat h = self.items[self.centerPlace].title ? 10.f : 0;
             self.centerBtn.frame = self.is_bulge
             ? CGRectMake(rect.origin.x,
@@ -128,12 +132,12 @@
                          rect.size.height+h)
             : rect;
         }
-        else
-        {
+        else{
             self.btnArr[j++].frame = rect;
         }
         rect.origin.x += rect.size.width;
     }
+    
     _border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0,0,
                                                                    self.bounds.size.width,
                                                                    [CYTabBarConfig shared].borderHeight)].CGPath;
@@ -144,8 +148,9 @@
  */
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     CGRect rect = self.centerBtn.frame;
-    if (CGRectContainsPoint(rect, point))
+    if (CGRectContainsPoint(rect, point)) {
         return self.centerBtn;
+    }
     return [super hitTest:point withEvent:event];
 }
 
@@ -153,7 +158,7 @@
 /**
  *  Control button click
  */
-- (void)controlBtnClick:(CYButton *)button{
+- (void)controlBtnClick:(CYButton *)button {
     if ([self.delegate respondsToSelector:@selector(tabBar:willSelectIndex:)]) {
         if (![self.delegate tabBar:self willSelectIndex:button.tag]) {
             return;
@@ -165,11 +170,11 @@
 /**
  *  Updata select button UI (kvc will setting)
  */
-- (void)setSelectButtoIndex:(NSUInteger)index{
+- (void)setSelectButtoIndex:(NSUInteger)index {
     if (self.centerBtn && index == self.centerBtn.tag) {
          self.selButton = (CYButton *)self.centerBtn;
     }else{
-        for (CYButton *loop in self.btnArr){
+        for (CYButton *loop in self.btnArr) {
             if (loop.tag == index){
                 self.selButton = loop;
                 break;
@@ -184,7 +189,7 @@
 /**
  *  Switch select button to highlight
  */
-- (void)setSelButton:(CYButton *)selButton{
+- (void)setSelButton:(CYButton *)selButton {
     _selButton.selected = NO;
     _selButton = selButton;
     _selButton.selected = YES;
@@ -194,7 +199,7 @@
 /**
  *  Center button click
  */
-- (void)centerBtnClick:(CYCenterButton *)button{
+- (void)centerBtnClick:(CYCenterButton *)button {
     if ([self.delegate respondsToSelector:@selector(tabbar:clickForCenterButton:)]) {
         [self.delegate tabbar:self clickForCenterButton:button];
     }
@@ -204,14 +209,13 @@
 /**
  *  Observe the attribute value change
  */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"badgeValue"] || [keyPath isEqualToString:@"badgeColor"]){
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"badgeValue"] || [keyPath isEqualToString:@"badgeColor"]) {
         CYButton *btn = (__bridge CYButton *)(context);
         btn.item = (UITabBarItem*)object;
     }
     else if ([object isEqual:[CYTabBarConfig shared]]){
-        if([keyPath isEqualToString:@"textColor"] ||[keyPath isEqualToString:@"selectedTextColor"]){
+        if([keyPath isEqualToString:@"textColor"] ||[keyPath isEqualToString:@"selectedTextColor"]) {
             UIColor *color = change[@"new"];
             UIControlState state = [keyPath isEqualToString:@"textColor"]? UIControlStateNormal: UIControlStateSelected;
             for (UIButton *loop in self.btnArr){
@@ -225,7 +229,7 @@
 /**
  *  Remove observer
  */
-- (void)dealloc{
+- (void)dealloc {
     for (int i=0; i<self.btnArr.count; i++) {
         int index = ({
             int n = 0;
