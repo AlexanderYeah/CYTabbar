@@ -10,7 +10,7 @@
 </br>
 <p>也许这不是一个很完善的底部控制器,但很好用，已经跟我经历了2个项目，做为基础的组件，希望帮助到你。</p></br>
 <p>如果issue不能及时响应你，你可以通过微信(WeChat)及时联系到我👇。</p></br>
-<img src="http://upload-images.jianshu.io/upload_images/2028853-d6cc84ab3ce4caf0.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/620"></br>
+<img src="http://upload-images.jianshu.io/upload_images/2028853-d6cc84ab3ce4caf0.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/310"></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-deab948167f6ddb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></br>
 
 ## 一.  功能简介 - Introduction
