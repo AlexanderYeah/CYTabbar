@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.3.2-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.4.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -76,6 +76,7 @@ pod 'CYTabBar'
 - 2017.07.27  修复badgeColor在iOS10下无此api调用崩溃的问题,item底部无文字图片居中
 - 2017.09.07  修复 屏幕监听转向的观察者移除时name不一致
 - 2017.10.16  适配iPhone X, 增加安全区域
+- 2017.10.30  适配安全区域
 			  
 
 ## 五.  更多 - More

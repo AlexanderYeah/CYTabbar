@@ -16,15 +16,14 @@
 @property(assign , nonatomic) NSInteger centerPlace;
 // Whether center button to bulge (kvc will setting)
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
-// tabBarController (kvc will setting)
+// tabBarController (! kvc will setting)
 @property (weak , nonatomic) UITabBarController *controller;
 // border
 @property (nonatomic,weak) CAShapeLayer *border;
 @end
 
 @implementation CYTabBar
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.btnArr = [NSMutableArray array];
@@ -111,14 +110,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self.controller setValue:self.superview forKey:@"layoutTabBar"];
+    
     int count = (int)(self.centerBtn ? self.btnArr.count+1 : self.btnArr.count);
     NSInteger mid = ({
         NSInteger mid = [CYTabBarConfig shared].centerBtnIndex;
         (mid>=0 && mid <count) ? mid : count/2;
     });
     CGRect rect = ({
-        CGFloat safeBottom = [[self.controller valueForKeyPath:@"safeBottomInsets"]floatValue];
-        CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height-safeBottom);
+        CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height-[[self.controller valueForKeyPath:@"safeBottomInsets"]floatValue]);
     });
     
     int j = 0;
@@ -247,4 +247,33 @@
     [[CYTabBarConfig shared]removeObserver:self forKeyPath:@"selectedTextColor" context:nil];
 }
 
+@end
+
+@interface ContentView()
+// tabBarController (! kvc will setting)
+@property (weak , nonatomic) UITabBarController *controller;
+@end
+
+@implementation ContentView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    CYTabBar *tabBar = [self.controller valueForKeyPath:@"tabbar"];
+    for (CYButton *loop in tabBar.btnArr) {
+        CGRect rect = [tabBar convertRect:loop.frame toView:self];
+        if (CGRectContainsPoint(rect, point)) {
+            return loop;
+        }
+    }
+    
+    CGRect rect = [tabBar convertRect:tabBar.centerBtn.frame toView:self];
+    if (CGRectContainsPoint(rect, point)) {
+        return tabBar.centerBtn;
+    }
+    
+    return [super hitTest:point withEvent:event];
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    return NO;
+}
 @end

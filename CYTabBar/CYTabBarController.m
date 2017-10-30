@@ -18,26 +18,23 @@
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
 // items
 @property (nonatomic,strong) NSMutableArray <UITabBarItem *>*items;
-// the bottom safeArea
-@property(assign , nonatomic) CGFloat safeBottomInsets;
+// safeArea of bottom
+@property (nonatomic,assign) CGFloat safeBottomInsets;
 @end
 
-@implementation CYTabBarController{int tabBarItemTag;BOOL firstInit;}
+@implementation CYTabBarController {
+    int tabBarItemTag;
+    BOOL firstInit;
+    CGRect tabbarFrame;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.centerPlace = -1;
     
-    // Observer Device Orientation
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-}
-
-- (void)viewWillLayoutSubviews {
-    if (@available(iOS 11.0, *)) {
-        if (self.view.safeAreaInsets.bottom != 0.0) {
-            self.tabbar.frame = [self tabbarFrame];
-        }
-    }
+    ContentView *view = [[ContentView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [view setValue:self forKeyPath:@"controller"];
+    [self.view addSubview:view];
 }
 
 /**
@@ -95,34 +92,11 @@
 }
 
 /**
- *  Device Orientation func
- */
-- (void)OrientationDidChange{
-    self.tabbar.frame = [self tabbarFrame];
-}
-
-/**
- *  Gets the frame of tabBar
- */
-- (CGRect)tabbarFrame{
-    return ({
-        self.safeBottomInsets = 0.0;
-        if (@available(iOS 11.0, *)) {
-            if (self.view.safeAreaInsets.bottom != 0.0) {
-                self.safeBottomInsets = self.view.safeAreaInsets.bottom;
-            }
-        }
-        CGRectMake(0, [UIScreen mainScreen].bounds.size.height-49-self.safeBottomInsets,
-                   [UIScreen mainScreen].bounds.size.width, 49+self.safeBottomInsets);
-    });
-}
-
-/**
  *  getter
  */
 - (CYTabBar *)tabbar{
     if (self.items.count && !_tabbar) {
-        _tabbar = [[CYTabBar alloc]initWithFrame:[self tabbarFrame]];
+        _tabbar = [[CYTabBar alloc]initWithFrame:CGRectZero];
         [_tabbar setValue:self forKey:@"controller"];
         [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
         [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
@@ -163,10 +137,26 @@
     UIViewController *viewController = [self findViewControllerWithobject:self.viewControllers[selectedIndex]];
     [self.tabbar removeFromSuperview];
     [viewController.view addSubview:self.tabbar];
-    viewController.extendedLayoutIncludesOpaqueBars = YES;
     [self.tabbar setValue:[NSNumber numberWithInteger:selectedIndex] forKeyPath:@"selectButtoIndex"];
+    [self.tabbar setNeedsLayout];
 }
 
+/**
+ *  Layout tabBar for superView
+ */
+- (void)setLayoutTabBar:(UIView *)layoutTabBar {
+    self.safeBottomInsets = 0;
+    if (@available(iOS 11.0, *)) {
+        self.safeBottomInsets = self.view.safeAreaInsets.bottom;
+    }
+    
+    CGFloat h = [UIScreen mainScreen].bounds.size.height;
+    CGRect rect = CGRectMake(0,
+                             h-49-self.safeBottomInsets-layoutTabBar.frame.origin.y,
+                             layoutTabBar.frame.size.width,
+                             49+self.safeBottomInsets);
+    self.tabbar.frame = rect;
+}
 
 
 /**
@@ -199,8 +189,6 @@
     }
 }
 
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-}
-
 @end
+
+

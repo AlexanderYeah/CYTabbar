@@ -21,11 +21,9 @@
     [self initNavigation];
     [self initButtons];
     
-    
     CYTABBARCONTROLLER.tabbar.delegate = self;
-    self.tabBarItem.badgeValue = @"remind";
+    self.tabBarItem.badgeValue = @"1";
 }
-
 
 #pragma mark - CYTabBarDelegate
 //中间按钮点击
@@ -34,12 +32,12 @@
 }
 //是否允许切换
 - (BOOL)tabBar:(CYTabBar *)tabBar willSelectIndex:(NSInteger)index{
-    NSLog(@"将要切换到---> %ld",index);
+//    NSLog(@"将要切换到---> %ld",index);
     return YES;
 }
 //通知切换的下标
 - (void)tabBar:(CYTabBar *)tabBar didSelectIndex:(NSInteger)index{
-    NSLog(@"切换到---> %ld",index);
+//    NSLog(@"切换到---> %ld",index);
 }
 
 
@@ -48,7 +46,7 @@
 #pragma mark - 跳转页面
 - (void)btnClick{
     UIViewController *vc = [UIViewController new];
-    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.view.backgroundColor = [UIColor grayColor];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -29,7 +29,7 @@
     [CYTabBarConfig shared].selectedTextColor = [UIColor orangeColor];
     [CYTabBarConfig shared].textColor = [UIColor grayColor];
     [CYTabBarConfig shared].backgroundColor = [UIColor whiteColor];
-    [CYTabBarConfig shared].selectIndex = 1;
+    [CYTabBarConfig shared].selectIndex = 0;
     [CYTabBarConfig shared].centerBtnIndex = 1;
     
     

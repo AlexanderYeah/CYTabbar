@@ -29,3 +29,6 @@
 @property (weak , nonatomic) id<CYTabBarDelegate>delegate;   // tabBar通知委托
 
 @end
+
+@interface ContentView : UIView
+@end
