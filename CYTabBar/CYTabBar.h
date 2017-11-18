@@ -27,8 +27,9 @@
 @property (strong , nonatomic) NSMutableArray <CYButton*>*btnArr;   // 其他按钮
 @property (strong , nonatomic) CYCenterButton *centerBtn;   // 中间按钮
 @property (weak , nonatomic) id<CYTabBarDelegate>delegate;   // tabBar通知委托
-
 @end
 
 @interface ContentView : UIView
+@property (weak , nonatomic) UITabBarController *controller;
 @end
+

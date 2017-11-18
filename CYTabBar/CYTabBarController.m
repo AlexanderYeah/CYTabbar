@@ -10,8 +10,9 @@
 #if  __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_10_0
 #import "UITabBarItem+BadgeColor.h"
 #endif
+#import <objc/runtime.h>
 
-@interface CYTabBarController ()
+@interface CYTabBarController ()<UIGestureRecognizerDelegate>
 // center button of place ( -1:none center button >=0:contain center button)
 @property(assign , nonatomic) NSInteger centerPlace;
 // Whether center button to bulge
@@ -26,25 +27,20 @@
     int tabBarItemTag;
     BOOL firstInit;
     CGRect tabbarFrame;
+    int lifecycleCount;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.centerPlace = -1;
-    
-    ContentView *view = [[ContentView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [view setValue:self forKeyPath:@"controller"];
-    [self.view addSubview:view];
 }
 
-/**
- *  Initialize selected
- */
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (!firstInit) {
-        firstInit = YES;
+    if (lifecycleCount == 0) {
+        lifecycleCount = 1;
+        //  Initialize selected
         NSInteger index = [CYTabBarConfig shared].selectIndex;
         if (index < 0) {
             self.selectedIndex = (self.centerPlace != -1 && self.items[self.centerPlace].tag != -1)
@@ -56,6 +52,26 @@
         else {
             self.selectedIndex = index;
         }
+        self.tabbar.backgroundColor = [CYTabBarConfig shared].backgroundColor;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (lifecycleCount == 1) {
+        lifecycleCount = 2;
+        for (UIView *loop in self.tabBar.subviews) {
+            if ([[[UIDevice currentDevice] systemVersion]floatValue] < 11.0 && loop.frame.size.height < 1.f) {
+                loop.hidden = YES;
+            }
+            if ([[[UIDevice currentDevice] systemVersion]floatValue] >= 11.0 && !CGPointEqualToPoint(CGPointZero, loop.frame.origin)) {
+                loop.hidden = YES;
+            }
+        }
+        [self.tabBar addSubview:self.tabbar];
+        self.tabbar.frame = self.tabBar.bounds;
+        [self.view addSubview:self.contentView];
     }
 }
 
@@ -65,8 +81,16 @@
 - (void)addChildController:(id)Controller title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName{
     UIViewController *vc = [self findViewControllerWithobject:Controller];
     vc.tabBarItem.title = title;
-    vc.tabBarItem.image = [UIImage imageNamed:imageName];
-    vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
+    
+    if (imageName) {
+        vc.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    if (selectedImageName) {
+        vc.tabBarItem.selectedImage =  [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[[CYTabBarConfig shared] textColor] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+    [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[[CYTabBarConfig shared] selectedTextColor] forKey:NSForegroundColorAttributeName] forState:UIControlStateSelected];
     
     vc.tabBarItem.tag = tabBarItemTag++;
     [self.items addObject:vc.tabBarItem];
@@ -96,21 +120,26 @@
  */
 - (CYTabBar *)tabbar{
     if (self.items.count && !_tabbar) {
-        _tabbar = [[CYTabBar alloc]initWithFrame:CGRectZero];
+        _tabbar = [[CYTabBar alloc]initWithFrame:self.tabBar.bounds];
         [_tabbar setValue:self forKey:@"controller"];
         [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
         [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
         _tabbar.items = self.items;
-        
-        //remove tabBar
-        for (UIView *loop in self.tabBar.subviews) {
-            [loop removeFromSuperview];
-        }
-        self.tabBar.hidden = YES;
-        [self.tabBar removeFromSuperview];
     }
     return _tabbar;
 }
+
+- (ContentView *)contentView{
+    if (!_contentView) {
+        CGRect rect = self.tabBar.frame;
+        rect.origin.y -= [CYTabBarConfig shared].bulgeHeight+10.f;
+        rect.size.height += [CYTabBarConfig shared].bulgeHeight+10.f;
+        _contentView = [[ContentView alloc]initWithFrame:rect];
+        _contentView.controller = self;
+    }
+    return _contentView;
+}
+
 - (NSMutableArray <UITabBarItem *>*)items{
     if(!_items){
         _items = [NSMutableArray array];
@@ -134,30 +163,8 @@
                                      userInfo:nil];
     }
     [super setSelectedIndex:selectedIndex];
-    UIViewController *viewController = [self findViewControllerWithobject:self.viewControllers[selectedIndex]];
-    [self.tabbar removeFromSuperview];
-    [viewController.view addSubview:self.tabbar];
     [self.tabbar setValue:[NSNumber numberWithInteger:selectedIndex] forKeyPath:@"selectButtoIndex"];
-    [self.tabbar setNeedsLayout];
 }
-
-/**
- *  Layout tabBar for superView
- */
-- (void)setLayoutTabBar:(UIView *)layoutTabBar {
-    self.safeBottomInsets = 0;
-    if (@available(iOS 11.0, *)) {
-        self.safeBottomInsets = self.view.safeAreaInsets.bottom;
-    }
-    
-    CGFloat h = [UIScreen mainScreen].bounds.size.height;
-    CGRect rect = CGRectMake(0,
-                             h-49-self.safeBottomInsets-layoutTabBar.frame.origin.y,
-                             layoutTabBar.frame.size.width,
-                             49+self.safeBottomInsets);
-    self.tabbar.frame = rect;
-}
-
 
 /**
  *  Catch viewController
@@ -168,27 +175,4 @@
     }
     return object;
 }
-
-/**
- *  hidden tabbar and do animated
- */
-- (void)setCYTabBarHidden:(BOOL)hidden animated:(BOOL)animated{
-    NSTimeInterval time = animated ? 0.3 : 0.0;
-    if (self.tabbar.isHidden) {
-        self.tabbar.hidden = NO;
-        [UIView animateWithDuration:time animations:^{
-            self.tabbar.transform = CGAffineTransformIdentity;
-        }];
-    }else{
-        CGFloat h = self.tabbar.frame.size.height;
-        [UIView animateWithDuration:time-0.1 animations:^{
-            self.tabbar.transform = CGAffineTransformMakeTranslation(0,h);
-        }completion:^(BOOL finished) {
-            self.tabbar.hidden = YES;
-        }];
-    }
-}
-
 @end
-
-

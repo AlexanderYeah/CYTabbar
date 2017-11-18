@@ -15,6 +15,8 @@
 		24225B091E75A80500B242A7 /* PlusAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B011E75A80500B242A7 /* PlusAnimate.m */; };
 		24225B0D1E75A86F00B242A7 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 24225B0B1E75A86F00B242A7 /* ViewController2.m */; };
 		24263A691F29C81800A48A50 /* UITabBarItem+BadgeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */; };
+		248298D31FBEC3DB001F29D0 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248298D21FBEC3DB001F29D0 /* TabBarController.m */; };
+		2495185B1FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.m in Sources */ = {isa = PBXBuildFile; fileRef = 2495185A1FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.m */; };
 		24EDE1291EBC0871008995D6 /* CYBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE11F1EBC0871008995D6 /* CYBadgeView.m */; };
 		24EDE12A1EBC0871008995D6 /* CYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE1211EBC0871008995D6 /* CYButton.m */; };
 		24EDE12B1EBC0871008995D6 /* CYCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EDE1231EBC0871008995D6 /* CYCenterButton.m */; };
@@ -40,6 +42,10 @@
 		24225B0B1E75A86F00B242A7 /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		24263A671F29C81800A48A50 /* UITabBarItem+BadgeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+BadgeColor.h"; sourceTree = "<group>"; };
 		24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+BadgeColor.m"; sourceTree = "<group>"; };
+		248298D11FBEC3DB001F29D0 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		248298D21FBEC3DB001F29D0 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		249518591FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+hidesBottomBarWhenPushed.h"; sourceTree = "<group>"; };
+		2495185A1FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+hidesBottomBarWhenPushed.m"; sourceTree = "<group>"; };
 		24EDE11E1EBC0871008995D6 /* CYBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYBadgeView.h; sourceTree = "<group>"; };
 		24EDE11F1EBC0871008995D6 /* CYBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYBadgeView.m; sourceTree = "<group>"; };
 		24EDE1201EBC0871008995D6 /* CYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYButton.h; sourceTree = "<group>"; };
@@ -89,6 +95,8 @@
 				24225AFE1E75A80500B242A7 /* PublishAnimate */,
 				24225ADE1E75A7FC00B242A7 /* AppDelegate.h */,
 				24225ADF1E75A7FC00B242A7 /* AppDelegate.m */,
+				248298D11FBEC3DB001F29D0 /* TabBarController.h */,
+				248298D21FBEC3DB001F29D0 /* TabBarController.m */,
 				24225AE11E75A7FC00B242A7 /* ViewController.h */,
 				24225AE21E75A7FC00B242A7 /* ViewController.m */,
 				24225B0A1E75A86F00B242A7 /* ViewController2.h */,
@@ -123,6 +131,8 @@
 			children = (
 				24263A671F29C81800A48A50 /* UITabBarItem+BadgeColor.h */,
 				24263A681F29C81800A48A50 /* UITabBarItem+BadgeColor.m */,
+				249518591FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.h */,
+				2495185A1FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.m */,
 				24EDE11E1EBC0871008995D6 /* CYBadgeView.h */,
 				24EDE11F1EBC0871008995D6 /* CYBadgeView.m */,
 				24EDE1201EBC0871008995D6 /* CYButton.h */,
@@ -214,7 +224,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				24EDE1291EBC0871008995D6 /* CYBadgeView.m in Sources */,
+				2495185B1FC06AD00014739B /* UINavigationController+hidesBottomBarWhenPushed.m in Sources */,
 				24EDE1311EBC1083008995D6 /* CYTabBarConfig.m in Sources */,
+				248298D31FBEC3DB001F29D0 /* TabBarController.m in Sources */,
 				24225AE31E75A7FC00B242A7 /* ViewController.m in Sources */,
 				24EDE12D1EBC0871008995D6 /* CYTabBar.m in Sources */,
 				24225AE01E75A7FC00B242A7 /* AppDelegate.m in Sources */,

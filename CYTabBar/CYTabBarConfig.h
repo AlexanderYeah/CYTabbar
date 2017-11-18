@@ -9,22 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @interface CYTabBarConfig : NSObject
-/** 设置文字颜色 */
+// 设置文字颜色
 @property (strong , nonatomic) UIColor *textColor;
-/** 设置文字选中颜色 */
+// 设置文字选中颜色
 @property (strong , nonatomic) UIColor *selectedTextColor;
-/** 背景颜色 */
+// 背景颜色
 @property(strong , nonatomic) UIColor *backgroundColor;
-/** 指定的初始化控制器 */
+// 指定的初始化控制器
 @property(assign , nonatomic) NSInteger selectIndex;
-/** 是否存在bar底部分割线 */
-@property(assign , nonatomic) BOOL haveBorder;
-/** bar底部分割线的高度 */
-@property(assign , nonatomic) CGFloat borderHeight;
-/** bar的底部分割线颜色 */
-@property(strong , nonatomic) UIColor *bordergColor;
-/** 中间按钮所在位置 */
+// 中间按钮所在位置
 @property (nonatomic,assign) NSInteger centerBtnIndex;
+// 中间按钮凸出的高度
+@property (nonatomic,assign) CGFloat bulgeHeight;
+// 是否在二级页面隐藏
+@property (nonatomic,assign) BOOL hidesBottomBarWhenPushed;
+
 
 /**
  *  外观配置的单例对象

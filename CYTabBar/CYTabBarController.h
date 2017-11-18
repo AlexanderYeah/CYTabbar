@@ -51,8 +51,10 @@
 
 
 @interface CYTabBarController : UITabBarController
-/** 自定义的tabbar */
+//  tabBar
 @property (strong , nonatomic) CYTabBar* tabbar;
+//  拦截点击手势的层
+@property (strong , nonatomic) ContentView* contentView;
 
 /**
  * 添加子控制器
@@ -78,12 +80,4 @@
                      title:(NSString *)title
                  imageName:(NSString *)imageName
          selectedImageName:(NSString *)selectedImageName;
-
-/**
- * 隐藏tabbar
- * @param hidden            是否隐藏
- * @param animated          是否执行动画
- */
-- (void)setCYTabBarHidden:(BOOL)hidden animated:(BOOL)animated;
-
 @end

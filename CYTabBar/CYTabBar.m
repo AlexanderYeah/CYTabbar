@@ -18,8 +18,6 @@
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
 // tabBarController (! kvc will setting)
 @property (weak , nonatomic) UITabBarController *controller;
-// border
-@property (nonatomic,weak) CAShapeLayer *border;
 @end
 
 @implementation CYTabBar
@@ -27,11 +25,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.btnArr = [NSMutableArray array];
-        if ([CYTabBarConfig shared].haveBorder) {
-            self.border.fillColor = [CYTabBarConfig shared].bordergColor.CGColor;
-        }
-        self.backgroundColor = [CYTabBarConfig shared].backgroundColor;
-        
         [[CYTabBarConfig shared]addObserver:self forKeyPath:@"textColor" options:NSKeyValueObservingOptionNew context:nil];
         [[CYTabBarConfig shared]addObserver:self forKeyPath:@"selectedTextColor" options:NSKeyValueObservingOptionNew context:nil];
     }
@@ -90,27 +83,10 @@
 }
 
 /**
- *  getter
- */
-- (CAShapeLayer *)border {
-    if (!_border) {
-        CAShapeLayer *border = [CAShapeLayer layer];
-        border.path = [UIBezierPath bezierPathWithRect:
-                       CGRectMake(0,0,self.bounds.size.width,[CYTabBarConfig shared].borderHeight)].CGPath;
-        [self.layer insertSublayer:border atIndex:0];
-        _border = border;
-    }
-    return _border;
-}
-
-
-/**
  *  layout
  */
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    [self.controller setValue:self.superview forKey:@"layoutTabBar"];
     
     int count = (int)(self.centerBtn ? self.btnArr.count+1 : self.btnArr.count);
     NSInteger mid = ({
@@ -118,7 +94,7 @@
         (mid>=0 && mid <count) ? mid : count/2;
     });
     CGRect rect = ({
-        CGRectMake(0, 0, self.bounds.size.width/count,self.bounds.size.height-[[self.controller valueForKeyPath:@"safeBottomInsets"]floatValue]);
+        CGRectMake(0, 0, self.bounds.size.width/count,49);
     });
     
     int j = 0;
@@ -127,7 +103,7 @@
             CGFloat h = self.items[self.centerPlace].title ? 10.f : 0;
             self.centerBtn.frame = self.is_bulge
             ? CGRectMake(rect.origin.x,
-                         -BULGEH-h ,
+                         -[CYTabBarConfig shared].bulgeHeight-h ,
                          rect.size.width,
                          rect.size.height+h)
             : rect;
@@ -137,10 +113,6 @@
         }
         rect.origin.x += rect.size.width;
     }
-    
-    _border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0,0,
-                                                                   self.bounds.size.width,
-                                                                   [CYTabBarConfig shared].borderHeight)].CGPath;
 }
 
 /**
@@ -166,6 +138,16 @@
     }
     self.controller.selectedIndex = button.tag;
 }
+
+/**
+ *  Center button click
+ */
+- (void)centerBtnClick:(CYCenterButton *)button {
+    if ([self.delegate respondsToSelector:@selector(tabbar:clickForCenterButton:)]) {
+        [self.delegate tabbar:self clickForCenterButton:button];
+    }
+}
+
 
 /**
  *  Updata select button UI (kvc will setting)
@@ -195,17 +177,6 @@
     _selButton.selected = YES;
 }
 
-
-/**
- *  Center button click
- */
-- (void)centerBtnClick:(CYCenterButton *)button {
-    if ([self.delegate respondsToSelector:@selector(tabbar:clickForCenterButton:)]) {
-        [self.delegate tabbar:self clickForCenterButton:button];
-    }
-}
-
-
 /**
  *  Observe the attribute value change
  */
@@ -224,7 +195,6 @@
         }
     }
 }
-
 
 /**
  *  Remove observer
@@ -246,28 +216,22 @@
     [[CYTabBarConfig shared]removeObserver:self forKeyPath:@"textColor" context:nil];
     [[CYTabBarConfig shared]removeObserver:self forKeyPath:@"selectedTextColor" context:nil];
 }
-
-@end
-
-@interface ContentView()
-// tabBarController (! kvc will setting)
-@property (weak , nonatomic) UITabBarController *controller;
 @end
 
 @implementation ContentView
-
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if ([ContentView getCurrentVC].hidesBottomBarWhenPushed) {
+        return [super hitTest:point withEvent:event];
+    }
     CYTabBar *tabBar = [self.controller valueForKeyPath:@"tabbar"];
+    
+    if (CGRectContainsPoint([tabBar convertRect:tabBar.centerBtn.frame toView:self], point)) {
+        return tabBar.centerBtn;
+    }
     for (CYButton *loop in tabBar.btnArr) {
-        CGRect rect = [tabBar convertRect:loop.frame toView:self];
-        if (CGRectContainsPoint(rect, point)) {
+        if (CGRectContainsPoint([tabBar convertRect:loop.frame toView:self], point)) {
             return loop;
         }
-    }
-    
-    CGRect rect = [tabBar convertRect:tabBar.centerBtn.frame toView:self];
-    if (CGRectContainsPoint(rect, point)) {
-        return tabBar.centerBtn;
     }
     
     return [super hitTest:point withEvent:event];
@@ -276,4 +240,33 @@
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return NO;
 }
+
++ (UIViewController *)getCurrentVC {
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+    if (!window) {
+        return nil;
+    }
+    UIView *tempView;
+    for (UIView *subview in window.subviews) {
+        if ([[subview.classForCoder description] isEqualToString:@"UILayoutContainerView"]) {
+            tempView = subview;
+            break;
+        }
+    }
+    if (!tempView) {
+        tempView = [window.subviews lastObject];
+    }
+    
+    id nextResponder = [tempView nextResponder];
+    while (![nextResponder isKindOfClass:[UIViewController class]] || [nextResponder isKindOfClass:[UINavigationController class]] || [nextResponder isKindOfClass:[UITabBarController class]]) {
+        tempView =  [tempView.subviews firstObject];
+        
+        if (!tempView) {
+            return nil;
+        }
+        nextResponder = [tempView nextResponder];
+    }
+    return  (UIViewController *)nextResponder;
+}
 @end
+

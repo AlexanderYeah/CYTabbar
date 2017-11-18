@@ -37,7 +37,7 @@
     if (self.is_bulge){
         self.imageView.frame = self.bounds;
         if (self.titleLabel.text.length) {
-            self.titleLabel.frame = CGRectMake(0 , self.frame.size.height +(BULGEH-16),
+            self.titleLabel.frame = CGRectMake(0 , self.frame.size.height +([CYTabBarConfig shared].bulgeHeight-15),
                                                self.frame.size.width , 16);
         }else{
             CGRect rect = self.imageView.frame;
@@ -58,7 +58,7 @@
      */
     CGFloat width = self.frame.size.width;
     CGFloat height = self.superview.frame.size.height;
-    self.titleLabel.frame = CGRectMake(0, height-BULGEH , width, BULGEH);
+    self.titleLabel.frame = CGRectMake(0, height-[CYTabBarConfig shared].bulgeHeight , width, [CYTabBarConfig shared].bulgeHeight);
     self.imageView.frame = CGRectMake(0 , 0, width, 35);
 }
 

@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "PlusAnimate.h"
+#import "ViewController2.h"
 #import "CYTabBarController.h"
 #import "AppDelegate.h"
 
-@interface ViewController ()<UITableViewDelegate , CYTabBarDelegate>
+@interface ViewController ()<UITableViewDelegate>
 @end
 
 @implementation ViewController
@@ -21,41 +21,15 @@
     [self initNavigation];
     [self initButtons];
     
-    CYTABBARCONTROLLER.tabbar.delegate = self;
     self.tabBarItem.badgeValue = @"1";
 }
 
-#pragma mark - CYTabBarDelegate
-//中间按钮点击
-- (void)tabbar:(CYTabBar *)tabbar clickForCenterButton:(CYCenterButton *)centerButton{
-    [PlusAnimate standardPublishAnimateWithView:centerButton];
-}
-//是否允许切换
-- (BOOL)tabBar:(CYTabBar *)tabBar willSelectIndex:(NSInteger)index{
-//    NSLog(@"将要切换到---> %ld",index);
-    return YES;
-}
-//通知切换的下标
-- (void)tabBar:(CYTabBar *)tabBar didSelectIndex:(NSInteger)index{
-//    NSLog(@"切换到---> %ld",index);
-}
-
-
-
-
 #pragma mark - 跳转页面
 - (void)btnClick{
-    UIViewController *vc = [UIViewController new];
+    ViewController *vc = [ViewController new];
     vc.view.backgroundColor = [UIColor grayColor];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-
-#pragma mark - 隐藏tabbar
-- (void)hidden{
-    [CYTABBARCONTROLLER setCYTabBarHidden:!CYTABBARCONTROLLER.tabbar.hidden animated:YES];
-}
-
 
 
 #pragma mark - 设置导航
@@ -68,21 +42,13 @@
 
 #pragma mark - 设置功能按钮
 - (void)initButtons{
-    CGFloat x = ([UIScreen mainScreen].bounds.size.width-150)/2;
-    UIButton *btn  = [[UIButton alloc]initWithFrame:CGRectMake(x, 200, 150, 30)];
+    UIButton *btn  = [[UIButton alloc]initWithFrame:CGRectMake(0 ,0 ,150 ,30)];
+    btn.center = self.view.center;
     [btn setTitle:@"跳转" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor blackColor];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-    
-    
-    UIButton *btn1  = [[UIButton alloc]initWithFrame:CGRectMake(x, 300, 150, 30)];
-    [btn1 setTitle:@"隐藏或显示tabbar" forState:UIControlStateNormal];
-    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btn1.backgroundColor = [UIColor blackColor];
-    [btn1 addTarget:self action:@selector(hidden) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn1];
 }
 
 

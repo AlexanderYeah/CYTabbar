@@ -3,14 +3,12 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.4.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.6.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
 </br>
 <p>也许这不是一个很完善的底部控制器,但很好用，已经跟我经历了2个项目，做为基础的组件，希望帮助到你。</p></br>
-<p>如果issue不能及时响应你，你可以通过微信(WeChat)及时联系到我👇。</p></br>
-<img src="http://upload-images.jianshu.io/upload_images/2028853-d6cc84ab3ce4caf0.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/310"></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-deab948167f6ddb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></br>
 
 ## 一.  功能简介 - Introduction
@@ -43,17 +41,7 @@ pod 'CYTabBar'
 需要导入头文件 "CYTabBarController.h" 
 然后在AppDelegate.m中初始化
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    CYTabBarController * tabbar = [[CYTabBarController alloc]init];
-    [tabbar addChildController:[ViewController new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-    [tabbar addChildController:[ViewController2 new] title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-    [tabbar addCenterController:nil bulge:YES title:@"xx" imageName:@"xx" selectedImageName:@"xx"];
-    self.window.rootViewController = tabbar;
-    [self.window makeKeyAndVisible];
-    return YES;
-}
+详情见Demo
 ```
 
 
@@ -77,11 +65,14 @@ pod 'CYTabBar'
 - 2017.09.07  修复 屏幕监听转向的观察者移除时name不一致
 - 2017.10.16  适配iPhone X, 增加安全区域
 - 2017.10.30  适配安全区域
+- 2017.11.18  修复多个问题
 			  
 
 ## 五.  更多 - More
 
-- 如果你发现任何Bug 或者 新需求请issue我.
+- 如果你发现任何Bug 或者 有趣的需求请issue我.
 
-- 大家一起讨论一起学习进步.
+- 大家一起讨论一起学习进步.</br>
+<p>如果issue不能及时响应你，着急的情况下！你可以通过微信(WeChat)及时联系到我👇。</p></br>
+<img src="http://upload-images.jianshu.io/upload_images/2028853-d6cc84ab3ce4caf0.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/310">
   

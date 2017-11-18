@@ -19,14 +19,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
     self.tabBarItem.badgeColor = [UIColor orangeColor];
-    self.tabBarItem.badgeValue = @"0";
-    
+    self.tabBarItem.badgeValue = nil;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end

@@ -184,7 +184,7 @@
                 } completion:^(BOOL finished) {
                     UILabel * lab = (UILabel *)_BtnItemTitle[k++];
                     lab.frame = CGRectMake(0, 0, W/3-30, 30);
-                    lab.center = CGPointMake(btn.center.x, CGRectGetMaxY(btn.frame)+20);
+                    lab.center = CGPointMake(btn.center.x, CGRectGetMaxY(btn.frame)+10);
                 }];
             }];
         }];
