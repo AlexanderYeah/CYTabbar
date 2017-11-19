@@ -61,11 +61,12 @@
     
     if (lifecycleCount == 1) {
         lifecycleCount = 2;
+        NSInteger version = [[[UIDevice currentDevice] systemVersion]integerValue];
         for (UIView *loop in self.tabBar.subviews) {
-            if ([[[UIDevice currentDevice] systemVersion]floatValue] < 11.0 && loop.frame.size.height < 1.f) {
+            if (version < 10 && loop.frame.size.height > 1.f) {
                 loop.hidden = YES;
             }
-            if ([[[UIDevice currentDevice] systemVersion]floatValue] >= 11.0 && !CGPointEqualToPoint(CGPointZero, loop.frame.origin)) {
+            if (version >= 10 && !CGPointEqualToPoint(CGPointZero, loop.frame.origin)) {
                 loop.hidden = YES;
             }
         }
