@@ -20,7 +20,7 @@
         config.bulgeHeight = 16.f;
         config.selectIndex = -1; // 指定的初始化控制器(<0时为默认)
         config.centerBtnIndex = -1;
-        config.hidesBottomBarWhenPushed = YES;
+        config.HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedNormal;
     });
     return config;
 }

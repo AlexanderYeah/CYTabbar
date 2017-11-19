@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.6.0-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.6.2-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -14,13 +14,13 @@
 ## 一.  功能简介 - Introduction
 
 - [x] 中间按钮可凸出  					--->  bulge设为YES 否则不突出
-- [x] 中按钮可设置控制器 或 普通按钮		---> Controller传入nil为普通按钮
-- [x] 二级页面不显示tababr 
-- [x] 小红点提醒角标  					---> 当前控制器.tabBarItem.badgeValue = @"remind";
-- [x] 数字提醒角标 						---> 当前控制器.tabBarItem.badgeValue = @"100";
-- [x] 切换控制器  						---> 当前tabBarController.selectedIndex = x(索引为添加控制器时的顺序);
-- [x] 改变数字提醒背景颜色 				---> 当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];
-- [x] 方便的定制UI 						---> [CYTabBarConfig shared].xxx = xxx;
+- [x] 中按钮可设置控制器 或 普通按钮		--->  Controller传入nil为普通按钮
+- [x] 设置push时，tabBar存在的方式			--->  [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedTransform;	 
+- [x] 小红点提醒角标  					--->  当前控制器.tabBarItem.badgeValue = @"remind";
+- [x] 数字提醒角标 						--->  当前控制器.tabBarItem.badgeValue = @"100";
+- [x] 切换控制器  						--->  当前tabBarController.selectedIndex = x(索引为添加控制器时的顺序);
+- [x] 改变数字提醒背景颜色 				--->  当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];
+- [x] 方便的定制UI 						--->  [CYTabBarConfig shared].xxx = xxx;
 等...
 
 ## 二.  安装 - Installation
@@ -66,6 +66,7 @@ pod 'CYTabBar'
 - 2017.10.16  适配iPhone X, 增加安全区域
 - 2017.10.30  适配安全区域
 - 2017.11.18  修复多个问题
+- 2017.11.19  增加push时，tabBar存在的方式	选项, 可以在CYTabBarConfig中设置
 			  
 
 ## 五.  更多 - More

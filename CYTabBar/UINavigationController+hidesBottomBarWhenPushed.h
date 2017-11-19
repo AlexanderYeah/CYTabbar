@@ -6,9 +6,8 @@
 //  Copyright © 2017年 张春雨. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <objc/runtime.h>
+#import "CYTabBarController.h"
+#import <objc/message.h>
 
-@interface UINavigationController (hidesBottomBarWhenPushed)
-
+@interface UINavigationController (hidesBottomBarWhenPushed)  <UINavigationControllerDelegate>
 @end

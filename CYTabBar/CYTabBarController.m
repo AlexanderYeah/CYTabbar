@@ -19,15 +19,11 @@
 @property(assign , nonatomic,getter=is_bulge) BOOL bulge;
 // items
 @property (nonatomic,strong) NSMutableArray <UITabBarItem *>*items;
-// safeArea of bottom
-@property (nonatomic,assign) CGFloat safeBottomInsets;
 @end
 
 @implementation CYTabBarController {
-    int tabBarItemTag;
-    BOOL firstInit;
-    CGRect tabbarFrame;
-    int lifecycleCount;
+    int _tabBarItemTag;
+    int _lifecycleCount;
 }
 
 - (void)viewDidLoad {
@@ -38,8 +34,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (lifecycleCount == 0) {
-        lifecycleCount = 1;
+    if (_lifecycleCount == 0) {
+        _lifecycleCount = 1;
         //  Initialize selected
         NSInteger index = [CYTabBarConfig shared].selectIndex;
         if (index < 0) {
@@ -59,8 +55,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (lifecycleCount == 1) {
-        lifecycleCount = 2;
+    if (_lifecycleCount == 1) {
+        _lifecycleCount = 2;
         NSInteger version = [[[UIDevice currentDevice] systemVersion]integerValue];
         for (UIView *loop in self.tabBar.subviews) {
             if (version < 10 && loop.frame.size.height > 1.f) {
@@ -93,7 +89,7 @@
     [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[[CYTabBarConfig shared] textColor] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
     [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[[CYTabBarConfig shared] selectedTextColor] forKey:NSForegroundColorAttributeName] forState:UIControlStateSelected];
     
-    vc.tabBarItem.tag = tabBarItemTag++;
+    vc.tabBarItem.tag = _tabBarItemTag++;
     [self.items addObject:vc.tabBarItem];
     [self addChildViewController:Controller];
 }
@@ -105,14 +101,14 @@
     _bulge = bulge;
     if (Controller) {
         [self addChildController:Controller title:title imageName:imageName selectedImageName:selectedImageName];
-        self.centerPlace = tabBarItemTag-1;
+        self.centerPlace = _tabBarItemTag-1;
     }else{
         UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:title
                                                           image:[UIImage imageNamed:imageName]
                                                   selectedImage:[UIImage imageNamed:selectedImageName]];
         item.tag = -1;
         [self.items addObject:item];
-        self.centerPlace = tabBarItemTag;
+        self.centerPlace = _tabBarItemTag;
     }
 }
 
@@ -148,12 +144,6 @@
     return _items;
 }
 
-- (void)InitializeTabbar{
-    [_tabbar setValue:[NSNumber numberWithBool:self.bulge] forKey:@"bulge"];
-    [_tabbar setValue:[NSNumber numberWithInteger:self.centerPlace] forKey:@"centerPlace"];
-    _tabbar.items = self.items;
-}
-
 /**
  *  Update current select controller
  */
@@ -175,5 +165,25 @@
         object = ((UITabBarController *)object).viewControllers.firstObject;
     }
     return object;
+}
+
+/**
+ *  hidden tabbar and do animated
+ */
+- (void)setTabBarHidden:(id)hidden {
+    NSTimeInterval time = 0.3;
+    if ([hidden boolValue]) {
+        CGFloat h = self.tabBar.frame.size.height;
+        [UIView animateWithDuration:time-0.1 animations:^{
+            self.tabBar.transform = CGAffineTransformMakeTranslation(0,h);
+        }completion:^(BOOL finished) {
+            self.tabBar.hidden = YES;
+        }];
+    } else {
+        self.tabBar.hidden = NO;
+        [UIView animateWithDuration:time animations:^{
+            self.tabBar.transform = CGAffineTransformIdentity;
+        }];
+    }
 }
 @end
