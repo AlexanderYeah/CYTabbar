@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name         = "CYTabBar"
-    s.version      = "1.6.2"
-    s.ios.deployment_target = '7.0'
+    s.version      = "1.6.3"
+    s.ios.deployment_target = '8.0'
     s.summary      = "A delightful setting interface framework."
     s.homepage     = "https://github.com/zhangchunyu2016/CYTabbar"
     s.license              = { :type => "MIT", :file => "LICENSE" }

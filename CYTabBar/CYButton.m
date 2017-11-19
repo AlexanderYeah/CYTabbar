@@ -46,8 +46,8 @@
  *  Set red dot item
  */
 - (void)setItem:(UITabBarItem *)item {
-    self.badgeView.badgeValue = item.badgeValue;
-    self.badgeView.badgeColor = item.badgeColor;
+    self.badgeView.badgeValue = [item valueForKeyPath:@"badgeValue"];
+    self.badgeView.badgeColor = [item valueForKeyPath:@"badgeColor"];
 }
 
 /**
