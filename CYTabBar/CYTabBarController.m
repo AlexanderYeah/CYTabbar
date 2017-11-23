@@ -171,9 +171,9 @@
  *  hidden tabbar and do animated
  */
 - (void)setTabBarHidden:(id)hidden {
-    NSTimeInterval time = 0.3;
+    NSTimeInterval time = 0.6;
     if ([hidden boolValue]) {
-        CGFloat h = self.tabBar.frame.size.height;
+        CGFloat h = self.tabBar.frame.size.height*2;
         [UIView animateWithDuration:time-0.1 animations:^{
             self.tabBar.transform = CGAffineTransformMakeTranslation(0,h);
         }completion:^(BOOL finished) {

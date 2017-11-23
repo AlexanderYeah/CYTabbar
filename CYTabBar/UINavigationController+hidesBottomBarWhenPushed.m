@@ -42,10 +42,11 @@
     }
     switch ([CYTabBarConfig shared].HidesBottomBarWhenPushedOption) {
         case HidesBottomBarWhenPushedTransform: {
-            if (self.viewControllers.count > 0 && [self.delegate isEqual:self]) {
-                [self hiddenTabBar:@YES];
-            }
-            if (![self.delegate isEqual:self]) {
+            if ([self.delegate isEqual:self]) {
+                if (self.viewControllers.count > 0 ) {
+                    [self hiddenTabBar:@YES];
+                }
+            } else {
                 NSLog(@"HidesBottomBarWhenPushedTransform is invalid, the delegate is not itself.");
             }
             [self hidesBottomBarAndPushViewController:viewController animated:animated];
@@ -69,9 +70,9 @@
 
 - (void)hiddenTabBar:(id)hidden {
     SEL faSelector=NSSelectorFromString(@"setTabBarHidden:");
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [self.tabBarController performSelector:faSelector withObject:hidden];
-#pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 }
 @end

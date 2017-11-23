@@ -19,13 +19,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+
+    // 继承CYTabBar的控制器， 你可以自定定义 或 不继承直接使用
     TabBarController * tabbar = [[TabBarController alloc]init];
-    
-    
-    /**
-     *  配置外观
-     */
+
+    // 配置
     [CYTabBarConfig shared].selectedTextColor = [UIColor orangeColor];
     [CYTabBarConfig shared].textColor = [UIColor grayColor];
     [CYTabBarConfig shared].backgroundColor = [UIColor whiteColor];
@@ -33,7 +31,7 @@
     [CYTabBarConfig shared].centerBtnIndex = 1;
     [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedTransform;
     
-    
+    // 样式
     switch (0) {
         case 0:
             // 中间按钮突出 ， 设为按钮 , 底部有文字 ， 闲鱼
@@ -49,6 +47,7 @@
             break;
     }
     
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.rootViewController = tabbar;
     [self.window makeKeyAndVisible];
     return YES;
