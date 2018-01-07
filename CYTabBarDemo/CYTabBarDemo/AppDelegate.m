@@ -29,7 +29,7 @@
     [CYTabBarConfig shared].backgroundColor = [UIColor whiteColor];
     [CYTabBarConfig shared].selectIndex = 0;
     [CYTabBarConfig shared].centerBtnIndex = 1;
-    [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedTransform;
+    [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedAlone;
     
     // 样式
     switch (0) {

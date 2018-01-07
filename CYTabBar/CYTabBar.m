@@ -241,32 +241,32 @@
     return NO;
 }
 
+
 + (UIViewController *)getCurrentVC {
-    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
-    if (!window) {
-        return nil;
-    }
-    UIView *tempView;
-    for (UIView *subview in window.subviews) {
-        if ([[subview.classForCoder description] isEqualToString:@"UILayoutContainerView"]) {
-            tempView = subview;
-            break;
-        }
-    }
-    if (!tempView) {
-        tempView = [window.subviews lastObject];
+    
+    UIViewController *vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    return [ContentView findViewController:vc];
+}
+
++ (UIViewController *)findViewController:(UIViewController *)vc
+{
+    if ([vc isKindOfClass:[UITabBarController class]]) {
+        vc = ((UITabBarController *)vc).selectedViewController;
+        return [ContentView findViewController:vc];
     }
     
-    id nextResponder = [tempView nextResponder];
-    while (![nextResponder isKindOfClass:[UIViewController class]] || [nextResponder isKindOfClass:[UINavigationController class]] || [nextResponder isKindOfClass:[UITabBarController class]]) {
-        tempView =  [tempView.subviews firstObject];
-        
-        if (!tempView) {
-            return nil;
-        }
-        nextResponder = [tempView nextResponder];
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        vc = ((UINavigationController *)vc).topViewController;
+        return [ContentView findViewController:vc];
     }
-    return  (UIViewController *)nextResponder;
+    
+    if ([vc isKindOfClass:[UIViewController class]]) {
+        return vc;
+    }
+    return nil;
 }
+
 @end
+
+
 

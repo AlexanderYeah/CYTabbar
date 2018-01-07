@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/language-Object--C-1eafeb.svg?style=flat)](https://developer.apple.com/Objective-C)
 [![](https://img.shields.io/badge/license-MIT-353535.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://github.com/zhangchunyu2016/CYTabbar)
-[![](https://img.shields.io/badge/Pod-1.6.4-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
+[![](https://img.shields.io/badge/Pod-1.6.6-blue.svg?style=flat)](https://cocoapods.org/?q=cytabbar)
 [![](https://img.shields.io/badge/QQ-707214577-red.svg)](http://wpa.qq.com/msgrd?v=3&uin=707214577&site=qq&menu=yes)
 
 
@@ -11,23 +11,27 @@
 <p>也许这不是一个很完善的底部控制器,但很好用，已经跟我经历了2个项目，做为基础的组件，希望帮助到你。</p></br>
 <img src="http://upload-images.jianshu.io/upload_images/2028853-deab948167f6ddb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></br>
 
+!! 很抱歉，换了新工作，最近很忙，很久才更新。 随着用的小伙伴越来越多，遇到很多以前没有的问题，故我准备在春节期间带来重构2.0版本，不再继承系统的tabBar，并加入新功能，更加动态，更加稳定。
+目前的版本不需要再额外的设置控制器的 HidesBottomBarWhenPushed 了，用runtime已经帮你做了。
+
+
 ## 一.  功能简介 - Introduction
 
 - [x] 中间按钮可凸出  					--->  bulge设为YES 否则不突出
 - [x] 中按钮可设置控制器 或 普通按钮		--->  Controller传入nil为普通按钮
-- [x] 设置push时，tabBar存在的方式			--->  [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedTransform;	 
+- [x] 设置push时，tabBar存在的方式	    --->  [CYTabBarConfig shared].HidesBottomBarWhenPushedOption = HidesBottomBarWhenPushedTransform;	 
 - [x] 小红点提醒角标  					--->  当前控制器.tabBarItem.badgeValue = @"remind";
-- [x] 数字提醒角标 						--->  当前控制器.tabBarItem.badgeValue = @"100";
-- [x] 切换控制器  						--->  当前tabBarController.selectedIndex = x(索引为添加控制器时的顺序);
+- [x] 数字提醒角标 					--->  当前控制器.tabBarItem.badgeValue = @"100";
+- [x] 切换控制器  					--->  当前tabBarController.selectedIndex = x(索引为添加控制器时的顺序);
 - [x] 改变数字提醒背景颜色 				--->  当前控制器.tabBarItem.badgeColor = [UIColor xxxColor];
-- [x] 方便的定制UI 						--->  [CYTabBarConfig shared].xxx = xxx;
+- [x] 方便的定制UI 					--->  [CYTabBarConfig shared].xxx = xxx;
 等...
 
 ## 二.  安装 - Installation
 
 ##### 方式1:CocoaPods安装
 ```
-pod 'CYTabBar', '~> 1.6.4’
+pod 'CYTabBar', '~> 1.6.6’
 或者
 pod 'CYTabBar',:git=>'https://github.com/zhangchunyu2016/CYTabbar.git'
 ```
@@ -69,7 +73,7 @@ pod 'CYTabBar',:git=>'https://github.com/zhangchunyu2016/CYTabbar.git'
 - 2017.10.30  适配安全区域
 - 2017.11.18  修复多个问题
 - 2017.11.19  增加push时，tabBar存在的方式	选项, 可以在CYTabBarConfig中设置
-			  
+- 2018.01.07  修复二级页面可以点击tabbar的问题，修复设置self.title引起页面错乱的问题，修复设置中间按钮高度，其他标题跟着下沉的问题
 
 ## 五.  更多 - More
 

@@ -34,7 +34,7 @@
     CGFloat width = self.frame.size.width;
     CGFloat height = self.superview.frame.size.height;
     if (self.titleLabel.text && ![self.titleLabel.text isEqualToString:@""]) {
-        self.titleLabel.frame = CGRectMake(0, self.frame.size.height -([CYTabBarConfig shared].bulgeHeight), width, 16);
+        self.titleLabel.frame = CGRectMake(0, self.frame.size.height - 16, width, 16);
         self.imageView.frame = CGRectMake(0 , 0, width, 35);
     }
     else{

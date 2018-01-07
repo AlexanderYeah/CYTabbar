@@ -49,26 +49,24 @@
             self.selectedIndex = index;
         }
         self.tabbar.backgroundColor = [CYTabBarConfig shared].backgroundColor;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (_lifecycleCount == 1) {
-        _lifecycleCount = 2;
-        NSInteger version = [[[UIDevice currentDevice] systemVersion]integerValue];
-        for (UIView *loop in self.tabBar.subviews) {
-            if (version < 10 && loop.frame.size.height > 1.f) {
-                loop.hidden = YES;
-            }
-            if (version >= 10 && !CGPointEqualToPoint(CGPointZero, loop.frame.origin)) {
-                loop.hidden = YES;
-            }
-        }
+        
+        // add tabBar
         [self.tabBar addSubview:self.tabbar];
         self.tabbar.frame = self.tabBar.bounds;
         [self.view addSubview:self.contentView];
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    NSInteger version = [[[UIDevice currentDevice] systemVersion]integerValue];
+    for (UIView *loop in self.tabBar.subviews) {
+        if (version < 10 && loop.frame.size.height > 1.f) {
+            loop.hidden = YES;
+        }
+        if (version >= 10 && !CGPointEqualToPoint(CGPointZero, loop.frame.origin)) {
+            loop.hidden = YES;
+        }
     }
 }
 
