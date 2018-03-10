@@ -61,6 +61,9 @@
     [super viewDidLayoutSubviews];
     NSInteger version = [[[UIDevice currentDevice] systemVersion]integerValue];
     for (UIView *loop in self.tabBar.subviews) {
+        if ([loop isEqual:self.tabbar]) {
+            continue;
+        }
         if (version < 10 && loop.frame.size.height > 1.f) {
             loop.hidden = YES;
         }
@@ -68,6 +71,7 @@
             loop.hidden = YES;
         }
     }
+    [self.tabBar bringSubviewToFront:self.tabbar];
 }
 
 /**
