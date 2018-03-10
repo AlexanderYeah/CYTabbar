@@ -30,7 +30,7 @@
 
 ##### 方式1:CocoaPods安装
 ```
-pod 'CYTabBar', '~> 1.6.6’
+pod 'CYTabBar', '~> 1.6.7’
 或者
 pod 'CYTabBar',:git=>'https://github.com/zhangchunyu2016/CYTabbar.git'
 ```
